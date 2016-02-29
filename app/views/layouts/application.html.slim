@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    meta charset="utf-8" /
+    meta content="width=device-width, initial-scale=1.0" name="viewport" /
+    title Licenciamiento de Software
+    /! Main css styles
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    /! Main javascript files
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  body
+    .container.container-flash-msg
+      #page-wrapper.gray-bg
+        - if flash[:alert]
+            #alert.hide = flash[:alert]
+        - if flash[:notice]
+            #notice.hide = flash[:notice]
+        = yield
+        /! Footer
+      = render 'layouts/footer'
+      /! End page wrapper      
+    /! End wrapper
+    /! For demo purpose we include javascript in view but you can easily start SeedProject and organize it with Rails asset pipeline as you want
+    = yield :javascript
