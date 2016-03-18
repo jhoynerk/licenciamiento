@@ -1,0 +1,65 @@
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-sm-6
+    h2 Nuevo Usuario
+    ol.breadcrumb
+      li
+        = link_to 'Inicio', dashboard_path 
+      li
+        = link_to 'Lista de Usuarios', users_path
+      li.active
+        strong Nuevo Usuario
+
+.wrapper.wrapper-content.animated.fadeIn
+  .row
+    .col-lg-12
+      .ibox.float-e-margins
+        .ibox-title
+          h5 Nuevo Usuario
+        .ibox-content
+          .row
+            = form_for @user, html: { class: 'validate_form' } do |f|
+              = render 'share/errors', object: f.object 
+              .row
+                .col-md-12
+                  .col-md-6
+                    .form-group
+                      label Nombre (*)
+                      = f.text_field :first_name, class: 'form-control required', placeholder: 'Manuel', tabindex: 1
+                  .col-md-6  
+                    .form-group
+                      label Apellido (*)
+                      = f.text_field :last_name, class: 'form-control required', placeholder: 'Perez', tabindex: 2
+              .row
+                .col-md-12
+                  .col-md-6
+                    .form-group
+                      label Password (*)
+                      = f.password_field :password, class: 'form-control required', placeholder: 'Password', tabindex: 3
+                  .col-md-6
+                    .form-group
+                      label Password confirmación(*)
+                      = f.password_field :password_confirmation, class: 'form-control required', placeholder: 'Password confirmación', tabindex: 3
+              .row
+                .col-md-12
+                  .col-md-6
+                    .form-group
+                      label Email (*)
+                      = f.email_field :email, class:'form-control required', placeholder: 'manuel@empresa.com', tabindex: 4                    
+                  .col-md-6
+                    .form-group
+                      label Puesto (*)
+                      = f.select :admin, ['Admin', 'Analista'], { include_blank: 'Seleccione '}, {class: 'form-control required chosen-select', tabindex: 5 }
+              .row
+                .col-sm-12.text-center
+                  .hr-line-dashed               
+                  button.btn.btn-primary.btn-outline type='submit'
+                    i.fa.fa-check
+                    |  Guardar
+                
+        .ibox-footer
+          span
+            strong Nota: 
+            | Al completar este formulario se enviará un correo electrónico a su empleado y se le permitirá completar
+            strong  sólo 
+            | sus datos personales faltantes.
+            

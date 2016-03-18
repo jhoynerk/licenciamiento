@@ -11,10 +11,61 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160229160529) do
+ActiveRecord::Schema.define(version: 20160301040917) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "contracts", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "license_id"
+  end
+
+  create_table "customers", force: :cascade do |t|
+    t.string   "business_name"
+    t.string   "rif"
+    t.string   "address"
+    t.string   "phone"
+    t.string   "email"
+    t.boolean  "status"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  create_table "licenses", force: :cascade do |t|
+    t.integer  "type_licenses_id"
+    t.integer  "contract_id"
+    t.string   "serial"
+    t.date     "creation_date"
+    t.integer  "user_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.string   "version"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "suits", force: :cascade do |t|
+    t.integer  "customer_id"
+    t.integer  "license_id"
+    t.integer  "product_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "type_licenses", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "duration"
+    t.string   "version"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
@@ -28,6 +79,10 @@ ActiveRecord::Schema.define(version: 20160229160529) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.boolean  "admin",                  default: false
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "work"
+    t.boolean  "status"
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
   end

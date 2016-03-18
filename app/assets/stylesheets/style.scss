@@ -1,0 +1,324 @@
+/*
+ *
+ *   INSPINIA - Responsive Admin Theme
+ *   version 2.3
+ *
+*/
+
+// Google Fonts
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&lang=en");
+
+// Bootstra
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+// Variables, Mixins
+@import "base/variables";
+@import "base/mixins";
+
+// INSPINIA Theme Elements
+@import "base/typography";
+@import "base/navigation";
+@import "base/top_navigation";
+@import "base/buttons";
+@import "base/badgets_labels";
+@import "base/elements";
+@import "base/sidebar";
+@import "base/base";
+@import "base/pages";
+@import "base/chat";
+@import "base/metismenu";
+@import "base/spinners";
+
+// RTL Support
+@import "base/rtl";
+
+// For demo only - config box style
+@import "base/theme-config";
+
+// INSPINIA Skins
+@import "base/skins";
+@import "base/md-skin";
+
+// Media query style
+@import "base/media";
+
+// Custom style
+// Your custom style to override base style
+@import "base/custom";
+
+.tooltip {
+  position: fixed;
+}
+
+.liquidations-table tbody tr td {
+  padding: 3px;
+}
+
+.wizard-large.wizard > .content {
+  min-height: 500px;
+}
+
+.terms-use{
+  overflow-y: scroll;
+  height: 330px;
+  margin-bottom: 20px;
+}
+
+.center-img{
+  display: block;
+  margin: 0 auto;
+}
+
+.no-resize{
+  resize: none;
+}
+
+.btn {
+  margin-right: 5px;
+}
+
+.map_canvas {
+  width: 100%;
+  height: 200px;
+}
+
+.file-name {
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.sk-spinner-wave div{
+  margin-left: 4px;
+}
+
+.input-group {
+  width: 100%;
+}
+
+.white-bg{
+  background-color: white;
+}
+
+.chosen-container-single .chosen-single {
+  background: #ffffff;
+  box-shadow: none;
+  -moz-box-sizing: border-box;
+  background-color: #FFFFFF;
+  border: 1px solid #CBD5DD;
+  border-radius: 2px;
+  cursor: text;
+  height: auto !important;
+  margin: 0;
+  min-height: 30px;
+  overflow: hidden;
+  padding: 4px 12px;
+  position: relative;
+  width: 100%;
+}
+.chosen-container-multi .chosen-choices li.search-choice {
+  background: #f1f1f1;
+  border: 1px solid #ededed;
+  border-radius: 2px;
+  box-shadow: none;
+  color: #333333;
+  cursor: default;
+  line-height: 13px;
+  margin: 3px 0 3px 5px;
+  padding: 3px 20px 3px 5px;
+  position: relative;
+}
+
+.datepicker {
+  z-index: 100000 !important;
+  display: block;
+}
+
+/* FULLCALENDAR */
+/* line 201, /Users/leninluque/Documents/apps/Ralis_Full_Version/app/assets/stylesheets/base/elements.scss */
+.fc-state-default {
+  background-color: white;
+  background-image: none;
+  background-repeat: repeat-x;
+  box-shadow: none;
+  color: #333333;
+  text-shadow: none;
+}
+
+/* line 210, /Users/leninluque/Documents/apps/Ralis_Full_Version/app/assets/stylesheets/base/elements.scss */
+.fc-state-default {
+  border: 1px solid;
+}
+
+/* line 214, /Users/leninluque/Documents/apps/Ralis_Full_Version/app/assets/stylesheets/base/elements.scss */
+.fc-button {
+  color: inherit;
+  border: 1px solid #e7eaec;
+  cursor: pointer;
+  display: inline-block;
+  height: 1.9em;
+  line-height: 1.9em;
+  overflow: hidden;
+  padding: 0 0.6em;
+  position: relative;
+  white-space: nowrap;
+}
+
+/* line 227, /Users/leninluque/Documents/apps/Ralis_Full_Version/app/assets/stylesheets/base/elements.scss */
+.fc-state-active {
+  background-color: #1ab394;
+  border-color: #1ab394;
+  color: white;
+}
+
+/* line 233, /Users/leninluque/Documents/apps/Ralis_Full_Version/app/assets/stylesheets/base/elements.scss */
+.fc-header-title h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: inherit;
+}
+
+/* line 239, /Users/leninluque/Documents/apps/Ralis_Full_Version/app/assets/stylesheets/base/elements.scss */
+.fc-content .fc-widget-header, .fc-content .fc-widget-content {
+  border-color: #e7eaec;
+  font-weight: normal;
+}
+
+/* line 244, /Users/leninluque/Documents/apps/Ralis_Full_Version/app/assets/stylesheets/base/elements.scss */
+.fc-border-separate tbody {
+  background-color: #f8f8f8;
+}
+
+/* line 248, /Users/leninluque/Documents/apps/Ralis_Full_Version/app/assets/stylesheets/base/elements.scss */
+.fc-state-highlight {
+  background: none repeat scroll 0 0 #fcf8e3;
+}
+
+/* line 252, /Users/leninluque/Documents/apps/Ralis_Full_Version/app/assets/stylesheets/base/elements.scss */
+.external-event {
+  padding: 5px 10px;
+  border-radius: 2px;
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+
+/* line 259, /Users/leninluque/Documents/apps/Ralis_Full_Version/app/assets/stylesheets/base/elements.scss */
+.fc-ltr .fc-event-hori.fc-event-end, .fc-rtl .fc-event-hori.fc-event-start {
+  border-radius: 2px;
+}
+
+/* line 265, /Users/leninluque/Documents/apps/Ralis_Full_Version/app/assets/stylesheets/base/elements.scss */
+.fc-event,
+.fc-agenda .fc-event-time,
+.fc-event a {
+  padding: 4px 6px;
+  background-color: #1ab394;
+  border-color: #1ab394;
+}
+
+/* line 271, /Users/leninluque/Documents/apps/Ralis_Full_Version/app/assets/stylesheets/base/elements.scss */
+.fc-event-time, .fc-event-title {
+  color: #717171;
+  padding: 0 1px;
+}
+
+/* line 276, /Users/leninluque/Documents/apps/Ralis_Full_Version/app/assets/stylesheets/base/elements.scss */
+.ui-calendar .fc-event-time, .ui-calendar .fc-event-title {
+  color: white;
+}
+
+#center-container {
+  width:100%;
+  color:#ccc;
+}
+
+inner-details {
+    font-size:0.8em;
+    list-style:none;
+    margin:7px;
+}
+
+#log {
+  position:absolute;
+  top:10px;
+  font-size:1.0em;
+  font-weight:bold;
+  color:#23A4FF;
+}
+
+#infovis {
+  position:relative;
+  width:100%;
+  height:600px;
+  margin:auto;
+  overflow:hidden;
+}
+
+/*TOOLTIPS*/
+.tip {
+  color: #111;
+  width: 139px;
+  background-color: white;
+  border:1px solid #ccc;
+  -moz-box-shadow:#555 2px 2px 8px;
+  -webkit-box-shadow:#555 2px 2px 8px;
+  -o-box-shadow:#555 2px 2px 8px;
+  box-shadow:#555 2px 2px 8px;
+  opacity:0.9;
+  filter:alpha(opacity=90);
+  font-size:10px;
+  font-family:Verdana, Geneva, Arial, Helvetica, sans-serif;
+  padding:7px;
+}
+
+.alert-success{
+  .notification-icon{
+    color: #2b542c;
+  }
+}
+.notification-icon{
+  padding: 5px;
+  font-size: 15px;
+}
+
+.notification-date{
+  font-size: 10px;
+  line-height: 15px;
+  font-weight: bold;
+  width: 50px;
+  padding-right: 10px;
+}
+
+.notifications{
+  .ibox-content{
+    a.alert{
+      display: block;
+      margin-bottom: 10px;
+      background-color: transparent;
+      display: table;
+      height: 50px;
+      width: 100%;
+      border: 2px solid;
+      &:hover, &:visited, &:active, &:focus{
+        &.alert-success{
+          color: #2b542c;
+        }
+        &.alert-info{
+          color: #23527c;
+        }
+        &.alert-danger{
+          color: #a94442;
+        }
+      }
+      .container-notification-text, .notification-date{
+        display: table-cell;
+        vertical-align: middle;
+      }
+    }
+  }
+}
+
+.contact-box{
+  padding: 15px, 10px;
+  min-height: 213px;
+}

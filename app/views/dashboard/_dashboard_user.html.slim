@@ -1,0 +1,123 @@
+.row.white-bg
+  .col-xs-4
+    .float-e-margins
+      .ibox-content.text-center.p-md
+        .widget.p-xs.text-center
+          .m-b-md
+            i.fa.fa-group.fa-4x
+            h1.m-xs = Customer.count
+            h3.font-bold.no-margins
+              | Clientes
+            small hasta los momentos
+  .col-xs-4
+    .float-e-margins
+      .ibox-content.text-center.p-md        
+        h1 = "Hola #{current_user.first_name.capitalize}"
+  .col-xs-4
+    .ibox.float-e-margins
+      .ibox-content.text-center.p-md
+        .widget.p-xs.text-center
+          .m-b-md
+            i.fa.fa-certificate.fa-4x
+            h1.m-xs = License.count
+            h3.font-bold.no-margins
+              | Licencias
+            small hasta los momentos
+.row
+  .col-lg-12
+    .wrapper.wrapper-content.animated.fadeInRight
+      .row
+        .col-lg-4
+          .ibox.float-e-margins
+            .ibox-content.ibox-heading.text-center
+              h3
+                i.fa.fa-laptop
+                |  Productos 
+              small
+                i.fa.fa-stack-exchange
+                |  Lista de productos que se encuentran disponibles
+            .ibox-content.no-padding
+              table.table.table-hover.no-margins
+                / - if @events.any?
+                /     thead
+                /       tr
+                /         th Foto
+                /         th Fecha
+                /         th Empleado
+                /         th Tipo de Evento
+                /     tbody
+                /       - @events.each do |e|
+                /           tr
+                /             td
+                /               = image_tag(e.employee.photo_url, size:'30x30',class:'img-circle img-responsive')
+                /             td
+                /               i.fa.fa-calendar 
+                /               = " #{e.date}"
+                /             td = e.employee.complete_name
+                /             td.text-navy
+                /               i.fa.fa-birthday-cake
+                /               = " #{e.name}"
+                / - else
+                    li.list-group-item
+                      p.text-center Por el momento, no hay eventos recientes!
+        .col-lg-4
+          .ibox.float-e-margins
+            .ibox-content.ibox-heading.text-center
+              h3
+                i.fa.fa-certificate
+                |  Licencias
+              small
+                i.fa.fa-stack-exchange
+                |  Lista de licencias que se encuentran disponibles
+            .ibox-content.no-padding
+              table.table.table-hover.no-margins
+                / - if @vacations.any?
+                /     thead
+                /       tr
+                /         th Estatus
+                /         th Empleado
+                /         th Inicio
+                /         th Fin
+                /     tbody
+                /       - @vacations.last(5).each do |v|
+                /           tr
+                /             td
+                /               span 
+                /                 = link_to history_company_vacations_path(@company), class:"label #{v.status_class}" do
+                /                   = v.status_humanize
+                /             td = v.employee.complete_name
+                /             td
+                /               = v.start_date
+                /             td
+                /               = v.end_date
+                / - else
+                    li.list-group-item
+                      p.text-center Por ahora, no hay solicitudes de vacaciones!
+        .col-lg-4
+          .ibox.float-e-margins
+            .ibox-content.ibox-heading.text-center
+              h3
+                i.fa.fa-check-square-o
+                |  Estados de contratos
+              small
+                i.fa.fa-stack-exchange
+                |  Aquí podrás visualizar los estado de los ultimos contratos.
+            .ibox-content.no-padding
+              table.table.table-hover.no-margins
+                / - if @liquidations.any?
+                /     thead
+                /       tr
+                /         th Fecha
+                /         th Empleado
+                /         th.text-center Descarga
+                /     tbody
+                /       - @liquidations.last(6).each do |b|
+                /           tr
+                /             td = (l b.date, format: " %B %Y").titleize
+                /             td = b.employee.complete_name
+                /             td.text-center
+                /               = link_to balance_path(b), target: '_blank' do
+                /                   i.fa.fa-download.fa-2x
+                / - else
+                    li.list-group-item
+                      p.text-center Por ahora, no tenemos tus liquidaciones disponibles!

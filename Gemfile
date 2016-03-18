@@ -5,6 +5,7 @@ ruby '2.2.2'
 gem "rails", "4.2.4"
 gem 'bootstrap-sass', '~> 3.3.5'
 gem 'font-awesome-rails', '4.5.0.0'
+gem 'ionicons-rails'
 
 # Use sqlite3 as the database for Active Record
 gem 'pg'

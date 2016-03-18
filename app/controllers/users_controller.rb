@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
+  include JqueryValidate
+  
   def index
+    @users = User.all
   end
 
   def new
@@ -10,8 +13,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params.merge(company: current_company))
     #password = @user.generate_random_pass
     if @user.save
-      #RegistrationMailer.send_signup_account(@user, password).deliver_now
-      redirect_to users_path, notice: 'Se ha añadido satisfactoriamente el nuevo empleado'
+      redirect_to users_path, notice: 'Se ha añadido satisfactoriamente el nuevo usuario'
     else
       render 'new'
     end
@@ -19,10 +21,14 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to users_path, notice: 'Se ha editado satisfactoriamente el empleado'
+      redirect_to users_path, notice: 'Se ha editado satisfactoriamente el usuario'
     else
       render :edit
     end
+  end
+
+  def show
+    @user = current_user
   end
 
   def change_password

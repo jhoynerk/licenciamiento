@@ -21,6 +21,13 @@ class DeviseCreateUsers < ActiveRecord::Migration
 
       ## Admin
       t.boolean :admin, default: false
+
+      ## user
+      t.string :first_name
+      t.string :last_name
+      t.string :work
+      t.boolean :status
+
       ## Confirmable
       # t.string   :confirmation_token
       # t.datetime :confirmed_at

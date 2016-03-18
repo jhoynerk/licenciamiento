@@ -1,1 +1,5 @@
-= link_to 'Salir', destroy_user_session_path, :method => :delete 
+#container-das
+  - if current_user.admin?
+    = render 'dashboard_admin'
+  - else
+    = render 'dashboard_user'

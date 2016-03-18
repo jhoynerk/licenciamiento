@@ -3,4 +3,10 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+  has_many :customers
+  has_many :licenses
+  
+  def complete_name
+    (last_name + ' ' + first_name).titleize
+  end
 end
