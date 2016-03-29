@@ -1,3 +1,3 @@
 class TypeLicense < ActiveRecord::Base
-  has_many :licenses
+  scope :on, -> { where(status: true) }
 end

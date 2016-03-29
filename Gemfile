@@ -33,6 +33,11 @@ gem 'jbuilder', '~> 1.2'
 
 gem 'devise'
 gem 'slim'
+gem "slim-rails"
+
+gem 'jquery-datatables-rails', '~> 3.3.0'
+gem "encryption"
+gem 'hashids'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

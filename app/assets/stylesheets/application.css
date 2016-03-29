@@ -25,5 +25,9 @@
  //= require jit-spacetree.css
  //= require tutorialize/tutorialize.css
  //= require tables
- *= require style
- */
+ //= require style 
+ *= require font-awesome
+ *= require dataTables/jquery.dataTables
+  */
+
+ @import "font-awesome";

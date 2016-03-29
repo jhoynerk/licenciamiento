@@ -1,0 +1,43 @@
+.ibox-content
+  = form_for @customer, class: 'form-horizontal' do |f|    
+    .row
+      .col-lg-6
+        .form-group
+          = f.label :business_name, 'Nombre del cliente:'
+          = f.text_field :business_name, class: 'form-control', placeholder: 'Nombre del cliente o Nombre Fiscal', required: true
+    .row
+      .col-lg-6
+        .form-group
+          = f.label :rif, 'Cedula o RIF:'
+          = f.text_field :rif, class: 'form-control', placeholder: 'Cedula o RIF', required: true
+    .row
+      .col-lg-6
+        .form-group
+          = f.label :email, 'Correo eléctrónico:'
+          = f.email_field :email, class: 'form-control', placeholder: 'Correo eléctrónico', required: true
+    .row  
+      .col-lg-6
+        .form-group
+          = f.label :address, 'Dirección:'
+          = f.text_field :address, class: 'form-control', placeholder: 'Dirección', required: true
+    .row
+      .col-lg-6
+        .form-group
+          = f.label :phone, 'Telefono:'
+          = f.text_field :phone, class: 'form-control', placeholder: 'Telefono', required: true
+    .form-group
+      label Estado del cliente
+      .checkbox.checkbox-circle
+        = f.check_box :status
+        = f.label :status, 'Habilitado'
+    .row
+      .col-lg-6.text-center
+        .hr-line-dashed
+        button.btn.btn-danger.btn-outline onClick="javascript:history.go(-1);"
+          i.fa.fa-remove
+          |  Cancelar
+        button.btn.btn-primary.btn-outline type='submit'
+          i.fa.fa-check
+          |  Enviar
+
+

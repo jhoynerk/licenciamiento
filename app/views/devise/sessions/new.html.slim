@@ -1,5 +1,6 @@
 .middle-box.text-center.loginscreen.animated.fadeInDown
   div
+    = image_tag( 'logo_2.png', size:'120x120', class:'img-responsive', style:'display: block; margin-left: auto; margin-right: auto')
     h3 Sistema de licenciamiento de Software
     p
       | Herramienta escencial para el manejo licencias de software para softech
@@ -12,9 +13,9 @@
         
       = f.submit "Ingresar", class:'btn btn-primary block full-width m-b'
       = link_to new_password_path(resource_name) do
-          small ¿Olvido su contraseña?
-      br
-      br
-      p class="text-muted text-center" 
-        small ¿No tiene una cuenta?
-      = link_to "Crear Ahora", new_user_registration_path, class:"btn btn-sm btn-white btn-block"
+      /    small ¿Olvido su contraseña?
+      /br
+      /br
+      /p class="text-muted text-center" 
+      /  small ¿No tiene una cuenta?
+      /= link_to "Crear Ahora", new_user_registration_path, class:"btn btn-sm btn-white btn-block"

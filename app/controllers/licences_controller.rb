@@ -1,4 +1,5 @@
 class LicensesController < ApplicationController
+  before_action :authenticate_user!
   def index
     @licenses = License.all
   end

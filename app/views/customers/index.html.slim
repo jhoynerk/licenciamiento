@@ -1,54 +1,36 @@
-.row.wrapper.border-bottom.white-bg.page-heading
-  .col-sm-4
-    h2 Cliente
-    ol.breadcrumb
-      li
-        = link_to 'Inicio', dashboard_path 
-      li.active
-        strong Lista de Cliente
-.row
-  .col-lg-12
-    .wrapper.wrapper-content.animated.fadeInUp
-      .ibox
-        .ibox-title
-          h5 Cliente de LiSoft
-          .ibox-tools
-            = link_to 'Añadir Cliente', new_customer_path, class:'btn btn-primary btn-xs'
-        .ibox-content
-          .project-list
-            table.table.table-hover
-              thead                
-                th Cliente
-                th Tipo 
-                th N° Licencias
-                th.nosort 
-              tbody
-                - @customers.each do |e|
-                    tr                      
-                      td.project-title
-                        = link_to e.business_name, customer_path(e)
-                        br/
-                        small 
-                          | Rif: 
-                          = e.rif
-                      td.project-completion
-                        p 
-                          - if e.status?
-                            span.label.label-success.pull-left Activo
-                          - else
-                            span.label.label-danger.pull-left Inactivo
-                      td
-                        p
-                          = e.suits.count
-                      td.project-actions
-                        = link_to customer_path(e), class: 'btn btn-white btn-sm' do 
-                          i.fa.fa-eye
-                          |  Perfil
-                        = link_to edit_customer_path(e), class:'btn btn-white btn-sm' do
-                          i.fa.fa-pencil
-                          |  Editar Info
-                        a href="#" customer_id="#{e.id}" class='btn btn-danger btn-sm end_contract'  data-toggle="modal" data-target="#end_contract_modal" 
-                          i.fa.fa-file-text
-                          |  Eliminar 
-  - content_for :javascript do   
-   = javascript_include_tag 'tables'
+h1 Lista de clientes
+table.table.table-responsive
+  thead
+    tr
+      th Cliente
+      th CI o RIF
+      th Dirección
+      th Teléfono
+      th Email
+      th Estado
+      th Acciones
+  tbody
+    - @customers.each do |customer|
+      tr
+        td = customer.business_name
+        td = customer.rif
+        td = customer.address
+        td = tel_to customer.phone
+        td = mail_to customer.email
+        td.text-center
+          - if customer.status
+            span.label.label-success.center
+              = fa_icon "check"
+          - else
+            span.label.label-danger.center
+              = fa_icon "remove"
+        td.text-center
+          = link_to fa_icon("search"), customer, class: 'btn btn-circle btn-info'
+          = link_to fa_icon("pencil"), edit_customer_path(customer), class: 'btn btn-circle btn-warning'
+          = link_to fa_icon("trash"), customer, data: {:confirm => '¿Estás seguro?'}, :method => :delete, class: 'btn btn-circle btn-danger'
+a.btn.btn-success type="button" href="#{new_customer_path}"
+  i.fa.fa-plus
+  |  Nuevo cliente
+
+- content_for :javascript
+  = javascript_include_tag 'tables'

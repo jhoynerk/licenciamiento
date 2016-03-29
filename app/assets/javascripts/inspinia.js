@@ -120,7 +120,9 @@ if($(".validate_form").length>0){
         todayBtn: "linked",
         calendarWeeks: true,
         language: 'es',
-        autoclose: true
+        autoclose: true,
+        keyboardNavigation: false,
+        forceParse: false
     });
 
     // Collapse ibox function

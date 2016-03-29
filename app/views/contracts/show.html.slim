@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong Contract:
+  = @contract.contract
+p
+  strong Status:
+  = @contract.status
+
+= link_to 'Edit', edit_contract_path(@contract)
+'|
+= link_to 'Back', contracts_path

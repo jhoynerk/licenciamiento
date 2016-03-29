@@ -322,3 +322,29 @@ inner-details {
   padding: 15px, 10px;
   min-height: 213px;
 }
+
+.yellow-border{
+  border: solid 1px $yellow;
+}
+
+.m-t-md {
+    margin-top: 20px;
+    background-color: white;
+    color: #616161;
+    padding: 16px;
+    border-radius: 5px;
+}
+
+.p-xl {
+    padding: 20px;
+    padding-bottom: 15px;
+    // color: black;
+}
+
+.table.table-hover tbody tr{
+  cursor: pointer;
+}
+
+#load_serial_inputs{
+  margin-bottom: 30px;
+}

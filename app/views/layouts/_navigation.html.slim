@@ -1,17 +1,9 @@
 nav.navbar-default.navbar-static-side role="navigation" 
   .sidebar-collapse
     ul#side-menu.nav.metismenu
-      li.nav-header
-        .dropdown.profile-element.text-center
-          span.text-center
-            = image_tag(current_employee.company_logo, size:'80x80', class:'img-responsive', style:'display: block; margin-left: auto; margin-right: auto')
-          a.dropdown-toggle#menu-profile data-toggle="dropdown" href="#" 
-            span.clear
-              span.block.m-t-xs
-                strong.font-bold = truncate(current_employee.complete_name, length: 20)
-              span.text-muted.text-xs.block
-                | Administrador
-                b.caret
+      li.nav-header        
+        span.text-center
+          = image_tag( 'logo.png', size:'120x120', class:'img-responsive', style:'display: block; margin-left: auto; margin-right: auto')
           ul.dropdown-menu.animated.fadeInRight.m-t-xs
             li
               = link_to 'Perfil', profile_employees_path 
@@ -36,14 +28,12 @@ nav.navbar-default.navbar-static-side role="navigation"
       li 
         a href="#"
           i.fa.fa-group
-          span.nav-label Empleados
+          span.nav-label Clientes
           span.fa.arrow
         ul.nav.nav-second-level.collapse
           li
-            = link_to 'Añadir Nuevo', new_employee_path
-            = link_to 'Listado', employees_path
-            = link_to 'Organigrama', orgchart_employees_path
-            = link_to 'Ex-Empleados', ex_employees_employees_path
+            = link_to 'Añadir Nuevo', new_customer_path
+            = link_to 'Listado', customers_path
       li
         = link_to benefits_companies_path
             i.fa.fa-money

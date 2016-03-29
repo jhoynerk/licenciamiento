@@ -4,6 +4,7 @@ class CreateTypeLicenses < ActiveRecord::Migration
       t.string :name
       t.integer :duration
       t.string :version
+      t.boolean :status
       t.timestamps null: false
     end
   end

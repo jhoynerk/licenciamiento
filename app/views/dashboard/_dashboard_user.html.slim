@@ -38,86 +38,84 @@
                 |  Lista de productos que se encuentran disponibles
             .ibox-content.no-padding
               table.table.table-hover.no-margins
-                / - if @events.any?
-                /     thead
-                /       tr
-                /         th Foto
-                /         th Fecha
-                /         th Empleado
-                /         th Tipo de Evento
-                /     tbody
-                /       - @events.each do |e|
-                /           tr
-                /             td
-                /               = image_tag(e.employee.photo_url, size:'30x30',class:'img-circle img-responsive')
-                /             td
-                /               i.fa.fa-calendar 
-                /               = " #{e.date}"
-                /             td = e.employee.complete_name
-                /             td.text-navy
-                /               i.fa.fa-birthday-cake
-                /               = " #{e.name}"
-                / - else
+                - if @products.any?
+                    thead
+                      tr
+                        th Nombre
+                        th Version
+                    tbody
+                      - @products.each do |p|
+                          tr class="#{(p.status) ? 'success' : 'danger'}" data-href="#{product_path(p)}"
+                            td = p.name
+                            td
+                              i.fa.fa-code 
+                              = " #{p.version}"
+                      tr data-href="#{products_path}"
+                        td colspan="3"
+                          | Ver todos
+                - else
                     li.list-group-item
-                      p.text-center Por el momento, no hay eventos recientes!
+                      p.text-center Por el momento, no hay productos recientes!
         .col-lg-4
           .ibox.float-e-margins
             .ibox-content.ibox-heading.text-center
               h3
                 i.fa.fa-certificate
-                |  Licencias
+                |  Licencias adquiridas
               small
                 i.fa.fa-stack-exchange
-                |  Lista de licencias que se encuentran disponibles
+                |  Lista de las ultimas licencias que fueron adquiridas
             .ibox-content.no-padding
               table.table.table-hover.no-margins
-                / - if @vacations.any?
-                /     thead
-                /       tr
-                /         th Estatus
-                /         th Empleado
-                /         th Inicio
-                /         th Fin
-                /     tbody
-                /       - @vacations.last(5).each do |v|
-                /           tr
-                /             td
-                /               span 
-                /                 = link_to history_company_vacations_path(@company), class:"label #{v.status_class}" do
-                /                   = v.status_humanize
-                /             td = v.employee.complete_name
-                /             td
-                /               = v.start_date
-                /             td
-                /               = v.end_date
-                / - else
+                - if @licenses.any?
+                    thead
+                      tr 
+                        th Producto
+                        th Cliente
+                        th Inicio
+                    tbody
+                      - @licenses.each do |c|
+                          tr class="#{(c.contract.status) ? 'success' : 'danger'}" data-href="#{license_path(c)}"
+                            td = c.suit.product.name
+                            td = c.suit.customer.business_name
+                            td = l(c.creation_date, format: :short).titleize
+                      tr data-href="#{licenses_path}"
+                        td colspan="3"
+                          | Ver todos
+                - else
                     li.list-group-item
-                      p.text-center Por ahora, no hay solicitudes de vacaciones!
+                      p.text-center Por ahora, no hay licencias adquiridas!
         .col-lg-4
           .ibox.float-e-margins
             .ibox-content.ibox-heading.text-center
               h3
                 i.fa.fa-check-square-o
-                |  Estados de contratos
+                |  Ultimos Clientes
               small
                 i.fa.fa-stack-exchange
-                |  Aquí podrás visualizar los estado de los ultimos contratos.
+                |  Aquí podrás visualizar los últimos clientes.
             .ibox-content.no-padding
               table.table.table-hover.no-margins
-                / - if @liquidations.any?
-                /     thead
-                /       tr
-                /         th Fecha
-                /         th Empleado
-                /         th.text-center Descarga
-                /     tbody
-                /       - @liquidations.last(6).each do |b|
-                /           tr
-                /             td = (l b.date, format: " %B %Y").titleize
-                /             td = b.employee.complete_name
-                /             td.text-center
-                /               = link_to balance_path(b), target: '_blank' do
-                /                   i.fa.fa-download.fa-2x
-                / - else
+                - if @customers.any?
+                    thead
+                      tr
+                        th Nombre
+                        th Rif
+                        th N° Licencias
+                    tbody
+                      - @customers.each do |c|
+                          tr class="#{(c.status) ? 'success' : 'danger'}" data-href="#{customer_path(c)}"
+                            td = c.business_name
+                            td = c.rif
+                            td = c.suits.count
+                      tr data-href="#{customers_path}"
+                        td colspan="3"
+                          | Ver Todas
+                - else
                     li.list-group-item
-                      p.text-center Por ahora, no tenemos tus liquidaciones disponibles!
+                      p.text-center Por ahora, no tenemos clientes disponibles!
+
+javascript:
+  $(".table tr").click(function() {
+    window.location.href = $(this).data("href");
+  });

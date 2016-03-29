@@ -9,7 +9,7 @@ html
     /! Main javascript files
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
-  body
+  body.skin-4
     #wrapper
       - if current_user.admin?
         = render 'layouts/navigation'
@@ -17,12 +17,10 @@ html
         = render 'layouts/navigation_user'  
       #page-wrapper.gray-bg
         = render 'layouts/topnavbar'
-        /! Page wrapper
-        /= render 'layouts/topnavbar'
-        /! Main view
         - if flash[:alert]
             #alert.hide = flash[:alert]
         - if flash[:notice]
             #notice.hide = flash[:notice]
-        = yield        
+        = yield
         = render 'layouts/footer'
+  = yield :javascript

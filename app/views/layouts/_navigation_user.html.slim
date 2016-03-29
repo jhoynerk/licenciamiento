@@ -1,64 +1,52 @@
 nav.navbar-default.navbar-static-side role="navigation" 
   .sidebar-collapse
     ul#side-menu.nav.metismenu
-      li.nav-header
-        .dropdown.profile-element.text-center
-          span
-            / = image_tag(current_user.photo_url, size:'80x80', class:'img-responsive', style:'display: block; margin-left: auto; margin-right: auto')
-          a.dropdown-toggle data-toggle="dropdown" href="#" 
-            span.clear
-              span.block.m-t-xs
-                strong.font-bold = truncate(current_user.first_name, length: 20)
-              span.text-muted.text-xs.block
-                | Empleado
-                b.caret
-          ul.dropdown-menu.animated.fadeInRight.m-t-xs
-            li.divider
-              = link_to 'Salir', destroy_user_session_path, :method => :delete 
-        .logo-element
-          / = image_tag(current_user.photo_url, size:'40x40', class: 'img-circle')
-      li
+      li.nav-header        
+        = image_tag( 'logo_2.png', size:'120x120', class:'img-responsive', style:'display: block; margin-left: auto; margin-right: auto')
+      li class="#{active_class(dashboard_path)}"
         a href="/"
           i.fa.fa-th-large
-          span.nav-label Dashboard
-      li 
+          span.nav-label Inicio
+      li class="#{active_class('/customer')}"
         a href="#"
           i.fa.fa-group
           span.nav-label Clientes
           span.fa.arrow
         ul.nav.nav-second-level.collapse
           li
-            = link_to 'Nuevo Cliente', new_user_path
+            = link_to 'Nuevo Cliente', new_customer_path
           li
-            = link_to 'Lista de Clientes', users_path
-      / li
-      /   = link_to orgchart_employees_path
-      /     i.fa.fa-sitemap
-      /     span.nav-label Organigrama
-      li
+            = link_to 'Lista de Clientes', customers_path
+      li class="#{active_class('/product')}"
         a href="#"
           i.fa.fa-laptop
           span.nav-label Productos
           span.fa.arrow
         ul.nav.nav-second-level.collapse
           li
-            = link_to 'Nuevo Producto', new_customer_path
+            = link_to 'Nuevo Producto', new_product_path
           li
-            = link_to 'Lista de Productos', customers_path
-      li
-        = link_to customers_path
-          i.fa.fa-certificate
-          span.nav-label Tipos de licencias
-      li
+            = link_to 'Lista de Productos', products_path
+      li class="#{active_class('/type_licenses')}"
         a href="#"
-          i.fa.fa-file-text-o
-          span.nav-label Contractos
+          i.fa.fa-laptop
+          span.nav-label Tipos de licencias
           span.fa.arrow
         ul.nav.nav-second-level.collapse
           li
-            = link_to 'Nuevo Contrato', new_customer_path
+            = link_to 'Nuevo Tipo de licencia', new_type_license_path
           li
-            = link_to 'Lista de Contratos', customers_path
+            = link_to 'Lista Tipos de licencias', type_licenses_path      
+      li class="#{active_class('/licenses')}"
+        a href="#"
+          i.fa.fa-file-text-o
+          span.nav-label Licencias
+          span.fa.arrow
+        ul.nav.nav-second-level.collapse
+          li
+            = link_to 'Nueva Licencia', new_license_path
+          li
+            = link_to 'Lista de Licencias', licenses_path
 
           
 
