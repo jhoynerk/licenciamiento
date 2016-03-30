@@ -1,5 +1,8 @@
 .ibox-content
-  = form_for @customer, class: 'form-horizontal' do |f|    
+  = form_for @customer, :html => {class: 'form-customer'} do |f|
+    .row
+      .col-lg-6
+        = render 'share/errors', object: f.object 
     .row
       .col-lg-6
         .form-group
@@ -29,7 +32,7 @@
       label Estado del cliente
       .checkbox.checkbox-circle
         = f.check_box :status
-        = f.label :status, 'Habilitado'
+        = f.label :status, 'Habilitar este cliente para operaciones en el sistema de licenciamiento'
     .row
       .col-lg-6.text-center
         .hr-line-dashed
@@ -51,7 +54,7 @@ javascript:
       return this.optional(element) || /^0(412|416|414|424|426|212)-\d{7}$/i.test(value);
     }, "El teléfono es inválido: Por favor ingresa uno válido. Format: 0212-0123456");
     
-    $("#new_customer").validate({
+    $(".form-customer").validate({
       rules: {  
         'customer[rif]': {
           required: true,

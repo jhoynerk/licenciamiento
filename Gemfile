@@ -39,6 +39,7 @@ gem "slim-rails"
 gem 'jquery-datatables-rails', '~> 3.3.0'
 gem "encryption"
 gem 'hashids'
+gem 'enumerate_it'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

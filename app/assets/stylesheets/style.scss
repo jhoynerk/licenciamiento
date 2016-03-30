@@ -348,3 +348,31 @@ inner-details {
 #load_serial_inputs{
   margin-bottom: 30px;
 }
+
+.table-pg{
+  margin-top: 15px;
+  background-color: #fff;
+  color: #616161;
+  border-radius: 5px;
+  tbody > tr > td{
+    border: none!important;
+  }
+  tbody > tr > td:first-child{
+    padding-left: 15px;
+    width: 40%;
+  }
+}
+
+.table-pg-mini{
+  margin-top: 15px;
+  background-color: #fff;
+  color: #616161;
+  border-radius: 5px;
+  tbody > tr > td{
+    border: none!important;
+  }
+  tbody > tr > td:first-child{
+    padding-left: 15px;
+    width: 50%;
+  }
+}

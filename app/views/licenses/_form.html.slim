@@ -10,17 +10,17 @@
       .col-lg-6
         .form-group
           = f.fields_for :contract do |contract_fields|
-            .radio.radio-danger
-              input#license_contract_attributes_status_1 name="license[contract_attributes][status]" type="radio" value="0" checked=(@license.contract.status == 0 ? 'checked':false)
-                label for="license_contract_attributes_status_1"
-                  | Desactivado
-            .radio.radio-success
-              input#license_contract_attributes_status_2 name="license[contract_attributes][status]" type="radio" value="1" checked=(@license.contract.status == 1 ? 'checked':false)
-                label for="license_contract_attributes_status_2"
-                  | Activado
-
             = contract_fields.label :contract, 'Número de contrato'
             = contract_fields.text_field :contract, class: 'form-control valid', placeholder: 'Número del contrato', required: true
+          /   .radio.radio-danger
+          /     input#license_contract_attributes_status_1 name="license[contract_attributes][status]" type="radio" value="0" checked=(@license.contract.status == 0 ? 'checked':false)
+          /       label for="license_contract_attributes_status_1"
+          /         | Desactivado
+          /   .radio.radio-success
+          /     input#license_contract_attributes_status_2 name="license[contract_attributes][status]" type="radio" value="1" checked=(@license.contract.status == 1 ? 'checked':false)
+          /       label for="license_contract_attributes_status_2"
+          /         | Activado
+
     .row
       .col-lg-6
         .form-group
@@ -31,12 +31,12 @@
       .col-lg-6
         .form-group
           = f.label :type_license_id, 'Tipo de Licencia'
-          = f.select :type_license_id, TypeLicense.on.collect {|p| [ p.name, p.id ] }, { include_blank: 'Seleccione' }, class: 'form-control valid'
+          = f.select :type_license_id, TypeLicense.on.collect {|p| [ p.name + ' ' + p.duration.to_s + ' Meses ', p.id ] }, { include_blank: 'Seleccione' }, class: 'form-control valid'
     .row
       .col-lg-6
         .form-group
           = f.label :creation_date, 'Inicio de Licencia.'
-          = f.text_field :creation_date, class: 'datepicker form-control'
+          = f.text_field :creation_date, class: 'datepicker form-control', placeholder: 'Inicio de Licencia.'
           = f.hidden_field :user_id, value: current_user.id
     .row
       .col-lg-6

@@ -1,0 +1,7 @@
+es-VE:
+  enumerations:
+    licenses_status:
+      never_used: "Nunca Usado"
+      used: "Usado"
+      spent_time: "Tiempo pasado"
+      canceled: "Cancelado"

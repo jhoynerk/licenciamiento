@@ -1,28 +1,22 @@
 .row.white-bg
-  .col-xs-4
+  .col-xs-6.col-md-offset-1.col-md-5
     .float-e-margins
-      .ibox-content.text-center.p-md
-        .widget.p-xs.text-center
-          .m-b-md
-            i.fa.fa-group.fa-4x
-            h1.m-xs = Customer.count
-            h3.font-bold.no-margins
-              | Clientes
-            small hasta los momentos
-  .col-xs-4
+      .text-center.p-md
+        .text-center
+          i.fa.fa-group.fa-4x.text-navy
+          h1.m-xs = Customer.count
+          h3.font-bold.no-margins
+            | Clientes
+          small hasta los momentos  
+  .col-xs-6.col-md-5
     .float-e-margins
-      .ibox-content.text-center.p-md        
-        h1 = "Hola #{current_user.first_name.capitalize}"
-  .col-xs-4
-    .ibox.float-e-margins
-      .ibox-content.text-center.p-md
-        .widget.p-xs.text-center
-          .m-b-md
-            i.fa.fa-certificate.fa-4x
-            h1.m-xs = License.count
-            h3.font-bold.no-margins
-              | Licencias
-            small hasta los momentos
+      .text-center.p-md
+        .text-center
+          i.fa.fa-certificate.fa-4x.mostasa
+          h1.m-xs = License.count
+          h3.font-bold.no-margins
+            | Licencias
+          small hasta los momentos
 .row
   .col-lg-12
     .wrapper.wrapper-content.animated.fadeInRight

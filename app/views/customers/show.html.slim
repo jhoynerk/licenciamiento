@@ -1,57 +1,90 @@
 .row
-  .col-lg-6
+  .col-lg-6.col-lg-offset-3
     .widget.p-xl class="#{(@customer.status)? 'navy-bg' : 'red-bg'}"
       h2.text-center
         strong = @customer.business_name 
         strong
           = fa_icon (@customer.status)? 'check' : 'remove', class: 'pull-right'
-      ul.list-unstyled.m-t-md
-        li
-          span.fa.fa-envelope.m-r-xs
-          label Email: 
-          |  #{mail_to @customer.email}
-        li
-          span.fa.fa-home.m-r-xs
-          label Dirección: 
-          |  #{@customer.address}
-        li
-          span.fa.fa-phone.m-r-xs
-          label Teléfono: 
-          |  #{tel_to @customer.phone}
-        li
+      table.table.table-pg
+        tbody
+          tr
+            td
+              span.fa.fa-envelope.m-r-xs
+              label Email: 
+            td
+              |  #{mail_to @customer.email}
+          tr
+            td
+              span.fa.fa-home.m-r-xs
+              label Dirección: 
+            td
+              |  #{@customer.address}
+          tr
+            td
+              span.fa.fa-phone.m-r-xs
+              label Teléfono: 
+            td
+              |  #{tel_to @customer.phone}
+          tr
+            td
+              span.fa.fa-table.m-r-xs
+              label Rif: 
+            td
+              |  #{@customer.rif}
           - if @customer.status
-            span = fa_icon("toggle-on")
-            label  Estado: 
-            |  Activo
+            tr
+              td
+                span = fa_icon("check-square", class: 'm-r-xs')
+                label Estado: 
+              td
+                |  Activo
           - else
-            span = fa_icon("toggle-off")
-            label  Estado: 
-            |  Desactivado
+            tr
+              td
+                span = fa_icon("check-square", class: 'm-r-xs')
+                label  Estado: 
+              td
+                |  Desactivado
 .clearfix
 .row
   - @customer.suits.each do |s|
     .col-lg-4
       .widget.white-bg.p-xl.yellow-border
         h3 = "#{s.product.name}"
-        ul.list-unstyled.m-t-md
-          li
-            span.fa.fa-barcode.m-r-xs
-            label N° Contrato:
-            = " #{s.license.contract.contract}"
-          li
-            span.fa.fa-cog.m-r-xs
-            label Tipo de licencia:
-            = " #{s.license.type_license.name}"
-          li
-            span.fa.fa-calendar-o.m-r-xs
-            label Duración:
-            = " #{s.license.type_license.duration} Meses" 
-          li
-            span.fa.fa-calendar-times-o.m-r-xs
-            label Fecha de inicio:
-            = " #{l(s.license.creation_date, format: :big)}" 
+        table.table.table-pg-mini
+          tbody
+            tr
+              td
+                span.fa.fa-barcode.m-r-xs
+                label N° Contrato:
+              td
+                = " #{s.license.contract.contract}"
+            tr
+              td
+                span.fa.fa-cog.m-r-xs
+                label Tipo de licencia:
+              td
+                = " #{s.license.type_license.name}"               
+            tr
+              td
+                span.fa.fa-calendar-o.m-r-xs
+                label Duración:
+              td
+                = " #{s.license.type_license.duration} Meses" 
+            tr
+              td
+                span.fa.fa-calendar-times-o.m-r-xs
+                label Comienzo:
+              td
+                = " #{l(s.license.creation_date, format: :big)}"
+            tr
+              td
+                span.fa.fa-calendar-times-o.m-r-xs
+                label Vencimiento:
+              td
+                = " #{l(s.license.creation_date + s.license.type_license.duration.month, format: :big)}" 
 .row
-  .col-lg-6
+  .col-lg-6.col-lg-offset-3
     .col-sm-12.text-center
       .hr-line-dashed
       button.btn.btn-danger.btn-outline onClick="javascript:history.go(-1);"

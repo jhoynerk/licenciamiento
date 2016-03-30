@@ -1,39 +1,52 @@
 .row
-  .col-lg-6
+  .col-lg-6.col-lg-offset-3
     .widget.p-xl class="#{(@license.contract.status)? 'navy-bg' : 'red-bg'}"
       h2.text-center
         = @license.suit.customer.business_name 
         strong
           = fa_icon (@license.contract.status)? 'check' : 'remove', class: 'pull-right'
-      ul.list-unstyled.m-t-md
-        li
-          span.fa.fa-barcode.m-r-xs
-          label N° de Contrato: 
-          |  #{@license.contract.contract}
-        li
-          span.fa.fa-cog.m-r-xs
-          label Tipo de Licencia: 
-          |  #{@license.type_license.name}
-        li
-          span.fa.fa-calendar-o.m-r-xs
-          label Duración de Licencia: 
-          |  #{@license.type_license.duration} Meses
-        li
-          span.fa.fa-calendar-times-o.m-r-xs
-          label Fecha de inicio: 
-          
-          |  #{l(@license.creation_date, format: :big)}
-        li
+      table.table.table-pg
+        tbody
+          tr
+            td
+              span.fa.fa-barcode.m-r-xs
+              label N° de Contrato: 
+            td
+              |  #{@license.contract.contract}
+          tr
+            td
+              span.fa.fa-cog.m-r-xs
+              label Tipo de Licencia: 
+            td
+              |  #{@license.type_license.name}
+          tr
+            td
+              span.fa.fa-calendar-o.m-r-xs
+              label Duración de Licencia: 
+            td
+              |  #{@license.type_license.duration} Meses
+          tr
+            td
+              span.fa.fa-calendar-times-o.m-r-xs
+              label Inicio: 
+            td
+              |  #{l(@license.creation_date, format: :big)}
           - if @license.contract.status
-            span = fa_icon("toggle-on")
-            label  Estado: 
-            |  Activo
+            tr
+              td
+                span = fa_icon("check-square", class: 'm-r-xs')
+                label Estado: 
+              td
+                |  #{@license.contract.status_humanize}
           - else
-            span = fa_icon("toggle-off")
-            label  Estado: 
-            |  Desactivado
+            tr
+              td
+                span = fa_icon("check-square", class: 'm-r-xs')
+                label  Estado: 
+              td
+                |  Desactivado
 .row
-  .col-lg-6
+  .col-lg-6.col-lg-offset-3
     .col-sm-12.text-center
       .hr-line-dashed
       button.btn.btn-danger.btn-outline onClick="javascript:history.go(-1);"

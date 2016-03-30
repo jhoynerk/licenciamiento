@@ -7,6 +7,7 @@ table.table.table-responsive
       th Descripción
       th Version
       th Habilitado
+      th N° de Licencias
       th Acciones
 
   tbody
@@ -22,6 +23,7 @@ table.table.table-responsive
           - else
             span.label.label-danger.center
               = fa_icon "remove"
+        td = product.suits.count
         td.text-center
           = link_to fa_icon("search"), product, class: 'btn btn-circle btn-info'
           = link_to fa_icon("pencil"), edit_product_path(product), class: 'btn btn-circle btn-warning'

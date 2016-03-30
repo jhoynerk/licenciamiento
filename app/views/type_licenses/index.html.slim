@@ -7,6 +7,7 @@ table.table
       th Duración
       th Version
       th Habilitada
+      th N° de Licencias
       th
 
   tbody
@@ -15,6 +16,7 @@ table.table
         td = type_license.name
         td = type_license.duration
         td = type_license.version
+        td = type_license.license.count
         td.text-center
           - if type_license.status
             span.label.label-success.center

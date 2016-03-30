@@ -1,21 +1,32 @@
 .row
-  .col-lg-6
+  .col-lg-6.col-lg-offset-3
     .widget.p-xl class="#{(@product.status)? 'navy-bg' : 'red-bg'}"
       h2.text-center
         = @product.name
         strong
           = fa_icon ''
-      ul.list-unstyled.m-t-md
-        li
-          span.fa.fa-file-text.m-r-xs
-          label Descripción: 
-          |  #{@product.description}
-        li
-          span.fa.fa-code.m-r-xs
-          label Version: 
-          |  #{@product.version}
+      table.table.table-pg
+        tbody
+          tr
+            td
+              span.fa.fa-file-text.m-r-xs
+              label Descripción: 
+            td
+              |  #{@product.description}
+          tr
+            td
+              span.fa.fa-code.m-r-xs
+              label Version: 
+            td
+              |  #{@product.version}
+          tr
+            td
+              span.fa.fa-certificate.m-r-xs
+              label N° de Licencias: 
+            td
+              |  #{@product.suits.count}
 .row
-  .col-lg-6
+  .col-lg-6.col-lg-offset-3
     .col-sm-12.text-center
       .hr-line-dashed
       button.btn.btn-danger.btn-outline onClick="javascript:history.go(-1);"

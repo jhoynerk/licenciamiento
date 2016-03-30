@@ -16,10 +16,10 @@
           = f.label :version, 'Versión:'
           = f.text_field :version, class: 'form-control', placeholder: 'Versión del producto', required: true
     .form-group
-      label Estado del cliente
+      label Estado del producto
       .checkbox.checkbox-circle
         = f.check_box :status
-        = f.label :status, 'Habilitado'
+        = f.label :status, 'Habilitar la generación de nuevas licencias para este producto.'
     .row
       .col-lg-6.text-center
         .hr-line-dashed
