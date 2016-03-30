@@ -26,8 +26,5 @@
  //= require tutorialize/tutorialize.css
  //= require tables
  //= require style 
- *= require font-awesome
  *= require dataTables/jquery.dataTables
   */
-
- @import "font-awesome";

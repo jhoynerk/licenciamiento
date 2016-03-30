@@ -23,5 +23,5 @@ test: &test
   database: licenciamiento_test  
 
 production:
-  encoding: unicode
+  <<: *default
   database: licenciamiento_production
