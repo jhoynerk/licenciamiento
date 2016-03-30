@@ -7,7 +7,7 @@ class DashboardController < ApplicationController
   end
 
   def test
-    redirect_to dashboard_path, notice: 'Solicitud enviada con exito'
+    redirect_to dashboard_path
   end
 end
 

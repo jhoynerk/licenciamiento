@@ -14,7 +14,6 @@
 //= require jquery_ujs
 //= require jquery/jquery-2.1.1.js
 //= require dataTables/jquery.dataTables
-//= require basic_setup.js
 //= require bootstrap-sprockets
 //= require metisMenu/jquery.metisMenu.js
 //= require pace/pace.min.js

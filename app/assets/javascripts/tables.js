@@ -8,7 +8,6 @@
 //= require dataTables/extras/dataTables.fixedHeader
 //= require dataTables/extras/dataTables.keyTable
 //= require dataTables/extras/dataTables.scroller
-//= require dataTables.buttons.js
 //= require dataTables/dataTables.tableTools.min.js
 
 $(document).ready(function(){

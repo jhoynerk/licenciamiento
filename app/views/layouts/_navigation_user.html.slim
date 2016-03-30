@@ -4,7 +4,7 @@ nav.navbar-default.navbar-static-side role="navigation"
       li.nav-header        
         = image_tag( 'logo_2.png', size:'120x120', class:'img-responsive', style:'display: block; margin-left: auto; margin-right: auto')
       li class="#{active_class(dashboard_path)}"
-        a href="/"
+        a href="#{dashboard_path}"
           i.fa.fa-th-large
           span.nav-label Inicio
       li class="#{active_class('/customer')}"
