@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type_licences_id: 
+  contract_id: 
+  serial: MyString
+  creation_date: 2016-03-26
+  user_id: 
+
+two:
+  type_licences_id: 
+  contract_id: 
+  serial: MyString
+  creation_date: 2016-03-26
+  user_id: 

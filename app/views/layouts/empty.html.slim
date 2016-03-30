@@ -1,0 +1,23 @@
+doctype html
+html
+  head
+    meta charset="utf-8" 
+    meta content="width=device-width, initial-scale=1.0" name="viewport" 
+    title Licenciamiento de Software
+    /! Main css styles
+  
+    = javascript_include_tag "https://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"
+    /! Main javascript files
+    = javascript_include_tag 'application'
+    = stylesheet_link_tag    'application', media: 'all'
+    = csrf_meta_tags
+  body.gray-bg
+    - if flash[:alert]
+        .middle-box.text-center
+          .alert.alert-danger.alert-dismissable = flash[:alert]
+    - if flash[:notice]
+        .middle-box.text-center
+          .alert.alert-success.alert-dismissable = flash[:notice]
+    /! Main view
+    = yield 
+    = yield :javascript 

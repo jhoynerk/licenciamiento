@@ -1,0 +1,52 @@
+nav.navbar-default.navbar-static-side role="navigation" 
+  .sidebar-collapse
+    ul#side-menu.nav.metismenu
+      li.nav-header        
+        = image_tag( 'logo_2.png', size:'120x120', class:'img-responsive', style:'display: block; margin-left: auto; margin-right: auto')
+      li class="#{active_class(dashboard_path)}"
+        a href="/"
+          i.fa.fa-th-large
+          span.nav-label Inicio
+      li class="#{active_class('/customer')}"
+        a href="#"
+          i.fa.fa-group
+          span.nav-label Clientes
+          span.fa.arrow
+        ul.nav.nav-second-level.collapse
+          li
+            = link_to 'Nuevo Cliente', new_customer_path
+          li
+            = link_to 'Lista de Clientes', customers_path
+      li class="#{active_class('/product')}"
+        a href="#"
+          i.fa.fa-laptop
+          span.nav-label Productos
+          span.fa.arrow
+        ul.nav.nav-second-level.collapse
+          li
+            = link_to 'Nuevo Producto', new_product_path
+          li
+            = link_to 'Lista de Productos', products_path
+      li class="#{active_class('/type_licenses')}"
+        a href="#"
+          i.fa.fa-laptop
+          span.nav-label Tipos de licencias
+          span.fa.arrow
+        ul.nav.nav-second-level.collapse
+          li
+            = link_to 'Nuevo Tipo de licencia', new_type_license_path
+          li
+            = link_to 'Lista Tipos de licencias', type_licenses_path      
+      li class="#{active_class('/licenses')}"
+        a href="#"
+          i.fa.fa-file-text-o
+          span.nav-label Licencias
+          span.fa.arrow
+        ul.nav.nav-second-level.collapse
+          li
+            = link_to 'Nueva Licencia', new_license_path
+          li
+            = link_to 'Lista de Licencias', licenses_path
+
+          
+

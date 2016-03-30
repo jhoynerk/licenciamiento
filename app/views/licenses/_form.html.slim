@@ -1,0 +1,101 @@
+.ibox-content
+  = form_for @license do |f|
+    .row
+      .col-lg-6
+        .form-group
+          = f.fields_for :suit do |suit_fields|
+            = suit_fields.label :customer_id, 'Cliente'
+            = suit_fields.select :customer_id, Customer.on.collect {|p| [ p.rif + ' | ' + p.business_name, p.id ] }, { include_blank: 'Seleccione' }, class: 'form-control chosen-select valid', required: true
+    .row
+      .col-lg-6
+        .form-group
+          = f.fields_for :contract do |contract_fields|
+            .radio.radio-danger
+              input#license_contract_attributes_status_1 name="license[contract_attributes][status]" type="radio" value="0" checked=(@license.contract.status == 0 ? 'checked':false)
+                label for="license_contract_attributes_status_1"
+                  | Desactivado
+            .radio.radio-success
+              input#license_contract_attributes_status_2 name="license[contract_attributes][status]" type="radio" value="1" checked=(@license.contract.status == 1 ? 'checked':false)
+                label for="license_contract_attributes_status_2"
+                  | Activado
+
+            = contract_fields.label :contract, 'Número de contrato'
+            = contract_fields.text_field :contract, class: 'form-control valid', placeholder: 'Número del contrato', required: true
+    .row
+      .col-lg-6
+        .form-group
+          = f.fields_for :suit do |suit_fields|
+            = suit_fields.label :product_id, 'Producto'
+            = suit_fields.select :product_id, Product.on.collect {|p| [ p.name, p.id ] }, { include_blank: 'Seleccione' }, class: 'form-control chosen-select valid'
+    .row
+      .col-lg-6
+        .form-group
+          = f.label :type_license_id, 'Tipo de Licencia'
+          = f.select :type_license_id, TypeLicense.on.collect {|p| [ p.name, p.id ] }, { include_blank: 'Seleccione' }, class: 'form-control valid'
+    .row
+      .col-lg-6
+        .form-group
+          = f.label :creation_date, 'Inicio de Licencia.'
+          = f.text_field :creation_date, class: 'datepicker form-control'
+          = f.hidden_field :user_id, value: current_user.id
+    .row
+      .col-lg-6
+        .form-group
+          button#loading-btn.btn.btn-white.btn-sm type="button" 
+            i.fa.fa-refresh
+              |  Generar Serial
+    .row#load_serial_inputs style="display:none"
+      .col-lg-6
+        .sk-spinner.sk-spinner-wandering-cubes
+          .sk-cube1
+          .sk-cube2
+    .row#serial_inputs style="display:none"
+      .col-lg-6
+        .form-group
+          = f.label :serial
+          = f.text_field :serial, class: 'form-control', readonly: true
+          = f.hidden_field :salt
+    .row
+      .col-lg-6.text-center
+        .hr-line-dashed
+        button.btn.btn-danger.btn-outline onClick="javascript:history.go(-1);"
+          i.fa.fa-remove
+          |  Cancelar
+        button.btn.btn-primary.btn-outline type='submit'
+          i.fa.fa-check
+          |  Enviar
+
+javascript:
+  $(document).ready(function(){
+
+    $.wait = function( callback, seconds){
+       return window.setTimeout( callback, seconds * 1000 );
+    }
+
+    if($('#license_serial').val() != ''){
+      $('#serial_inputs').show();
+    }
+
+    $('#loading-btn').on('click', function(){
+      if($('#license_suit_attributes_customer_id').val() != ''){
+        $('#load_serial_inputs').show();
+        $('#serial_inputs').hide();
+        customer_id = $('#license_suit_attributes_customer_id').val();
+        $.ajax({
+          type: "POST",
+          url: "/generar_serial.json",
+          dataType: "json",
+          data: { customer_id: customer_id },
+          complete: function(data){
+            //success_notification('Se genero un nuevo serial.');
+            $('#license_serial').val(data.responseJSON.hash);
+            $('#license_salt').val(data.responseJSON.salt);
+            $.wait( function(){ $('#serial_inputs').show() }, 3);
+          }
+        });
+        $('#load_serial_inputs').delay(2500).fadeToggle();
+      }else{
+        alert_notification('Seleccione primero el cliente.');
+      }
+    });
+  });

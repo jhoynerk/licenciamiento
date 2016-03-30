@@ -1,0 +1,26 @@
+doctype html
+html
+  head
+    meta charset="utf-8" /
+    meta content="width=device-width, initial-scale=1.0" name="viewport" /
+    title Licenciamiento
+    /! Main css styles
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    /! Main javascript files
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  body.skin-4
+    #wrapper
+      - if current_user.admin?
+        = render 'layouts/navigation'
+      - else
+        = render 'layouts/navigation_user'  
+      #page-wrapper.gray-bg
+        = render 'layouts/topnavbar'
+        - if flash[:alert]
+            #alert.hide = flash[:alert]
+        - if flash[:notice]
+            #notice.hide = flash[:notice]
+        = yield
+        = render 'layouts/footer'
+  = yield :javascript

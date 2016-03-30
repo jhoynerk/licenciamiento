@@ -1,10 +1,14 @@
 source 'https://rubygems.org'
+ruby '2.2.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.2'
+gem "rails", "4.2.4"
+gem 'bootstrap-sass', '~> 3.3.5'
+gem 'font-awesome-rails', '4.5.0.0'
+gem 'ionicons-rails'
 
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'pg'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -27,9 +31,38 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
+gem 'devise'
+gem 'slim'
+gem "slim-rails"
+
+gem 'jquery-datatables-rails', '~> 3.3.0'
+gem "encryption"
+gem 'hashids'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
+end
+
+group :test do
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+  gem 'database_cleaner'
+end
+
+group :development, :test do
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'byebug'
+  # gem 'pry-rails'
+  gem 'faker', '1.4.3'
+end
+
+group :development do
+  gem 'wkhtmltopdf', '~> 0.1.2'
+  # Access an IRB console on exception pages or by using <%= console %> in views
+  gem 'web-console', '~> 2.0'
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring'
 end
 
 # Use ActiveModel has_secure_password

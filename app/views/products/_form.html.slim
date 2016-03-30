@@ -1,0 +1,31 @@
+.ibox-content
+  = form_for @product do |f|
+    .row
+      .col-lg-6
+        .form-group
+          = f.label :name, 'Nombre:'
+          = f.text_field :name, class: 'form-control', placeholder: 'Nombre del producto', required: true
+    .row
+      .col-lg-6
+        .form-group
+          = f.label :description, 'Descripción:'
+          = f.text_field :description, class: 'form-control', placeholder: 'Descripción del producto', required: true
+    .row
+      .col-lg-6
+        .form-group
+          = f.label :version, 'Versión:'
+          = f.text_field :version, class: 'form-control', placeholder: 'Versión del producto', required: true
+    .form-group
+      label Estado del cliente
+      .checkbox.checkbox-circle
+        = f.check_box :status
+        = f.label :status, 'Habilitado'
+    .row
+      .col-lg-6.text-center
+        .hr-line-dashed
+        button.btn.btn-danger.btn-outline onClick="javascript:history.go(-1);"
+          i.fa.fa-remove
+          |  Cancelar
+        button.btn.btn-primary.btn-outline type='submit'
+          i.fa.fa-check
+          |  Enviar

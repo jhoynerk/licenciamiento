@@ -1,0 +1,23 @@
+h1 Listing contracts
+
+table
+  thead
+    tr
+      th Contract
+      th Status
+      th
+      th
+      th
+
+  tbody
+    - @contracts.each do |contract|
+      tr
+        td = contract.contract
+        td = contract.status
+        td = link_to 'Show', contract
+        td = link_to 'Edit', edit_contract_path(contract)
+        td = link_to 'Destroy', contract, data: {:confirm => '¿Estás seguro?'}, :method => :delete
+
+br
+
+= link_to 'New Contract', new_contract_path

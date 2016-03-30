@@ -1,0 +1,26 @@
+.row
+  .col-lg-6
+    .widget.p-xl class="#{(@product.status)? 'navy-bg' : 'red-bg'}"
+      h2.text-center
+        = @product.name
+        strong
+          = fa_icon ''
+      ul.list-unstyled.m-t-md
+        li
+          span.fa.fa-file-text.m-r-xs
+          label Descripción: 
+          |  #{@product.description}
+        li
+          span.fa.fa-code.m-r-xs
+          label Version: 
+          |  #{@product.version}
+.row
+  .col-lg-6
+    .col-sm-12.text-center
+      .hr-line-dashed
+      button.btn.btn-danger.btn-outline onClick="javascript:history.go(-1);"
+        i.fa.fa-remove
+        |  Regresar
+      a.btn.btn-primary.btn-outline href="#{edit_product_path(@product)}"
+        i.fa.fa-check
+        |  Edición

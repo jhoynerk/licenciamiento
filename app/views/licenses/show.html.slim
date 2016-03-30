@@ -1,0 +1,44 @@
+.row
+  .col-lg-6
+    .widget.p-xl class="#{(@license.contract.status)? 'navy-bg' : 'red-bg'}"
+      h2.text-center
+        = @license.suit.customer.business_name 
+        strong
+          = fa_icon (@license.contract.status)? 'check' : 'remove', class: 'pull-right'
+      ul.list-unstyled.m-t-md
+        li
+          span.fa.fa-barcode.m-r-xs
+          label N° de Contrato: 
+          |  #{@license.contract.contract}
+        li
+          span.fa.fa-cog.m-r-xs
+          label Tipo de Licencia: 
+          |  #{@license.type_license.name}
+        li
+          span.fa.fa-calendar-o.m-r-xs
+          label Duración de Licencia: 
+          |  #{@license.type_license.duration} Meses
+        li
+          span.fa.fa-calendar-times-o.m-r-xs
+          label Fecha de inicio: 
+          
+          |  #{l(@license.creation_date, format: :big)}
+        li
+          - if @license.contract.status
+            span = fa_icon("toggle-on")
+            label  Estado: 
+            |  Activo
+          - else
+            span = fa_icon("toggle-off")
+            label  Estado: 
+            |  Desactivado
+.row
+  .col-lg-6
+    .col-sm-12.text-center
+      .hr-line-dashed
+      button.btn.btn-danger.btn-outline onClick="javascript:history.go(-1);"
+        i.fa.fa-remove
+        |  Regresar
+      a.btn.btn-primary.btn-outline href="#{edit_license_path(@license)}"
+        i.fa.fa-check
+        |  Edición

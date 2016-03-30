@@ -1,0 +1,36 @@
+h1 Lista de clientes
+table.table.table-responsive
+  thead
+    tr
+      th Cliente
+      th CI o RIF
+      th Dirección
+      th Teléfono
+      th Email
+      th Estado
+      th Acciones
+  tbody
+    - @customers.each do |customer|
+      tr
+        td = customer.business_name
+        td = customer.rif
+        td = customer.address
+        td = tel_to customer.phone
+        td = mail_to customer.email
+        td.text-center
+          - if customer.status
+            span.label.label-success.center
+              = fa_icon "check"
+          - else
+            span.label.label-danger.center
+              = fa_icon "remove"
+        td.text-center
+          = link_to fa_icon("search"), customer, class: 'btn btn-circle btn-info'
+          = link_to fa_icon("pencil"), edit_customer_path(customer), class: 'btn btn-circle btn-warning'
+          = link_to fa_icon("trash"), customer, data: {:confirm => '¿Estás seguro?'}, :method => :delete, class: 'btn btn-circle btn-danger'
+a.btn.btn-success type="button" href="#{new_customer_path}"
+  i.fa.fa-plus
+  |  Nuevo cliente
+
+- content_for :javascript
+  = javascript_include_tag 'tables'

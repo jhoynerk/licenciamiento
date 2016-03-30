@@ -1,0 +1,34 @@
+h1 Lista de productos
+
+table.table.table-responsive
+  thead
+    tr
+      th Nombre
+      th Descripción
+      th Version
+      th Habilitado
+      th Acciones
+
+  tbody
+    - @products.each do |product|
+      tr
+        td = product.name
+        td = product.description
+        td = product.version
+        td.text-center
+          - if product.status
+            span.label.label-success.center
+              = fa_icon "check"
+          - else
+            span.label.label-danger.center
+              = fa_icon "remove"
+        td.text-center
+          = link_to fa_icon("search"), product, class: 'btn btn-circle btn-info'
+          = link_to fa_icon("pencil"), edit_product_path(product), class: 'btn btn-circle btn-warning'
+          = link_to fa_icon("trash"), product, data: {:confirm => '¿Estás seguro?'}, :method => :delete, class: 'btn btn-circle btn-danger'
+a.btn.btn-success type="button" href="#{new_product_path}"
+  i.fa.fa-plus
+  |  Nuevo producto
+
+- content_for :javascript
+  = javascript_include_tag 'tables'

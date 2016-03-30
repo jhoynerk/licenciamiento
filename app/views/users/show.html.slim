@@ -1,0 +1,26 @@
+.row.wrapper.border-bottom.white-bg.page-heading
+  .col-sm-4
+    h2 Usuarios
+    ol.breadcrumb
+      li
+        = link_to 'Inicio', dashboard_path 
+      li
+        = link_to 'Lista de Usuarios', users_path
+      li.active
+        strong = @user.complete_name
+.wrapper.wrapper-content.animated.fadeInRight        
+  .row.m-b-lg.m-t-lg
+    .col-md-6      
+      .profile-info
+        div
+          div
+            h2.no-margins
+              = @user.complete_name
+            h4        
+    .col-md-6
+      table.table.small.m-b-xs
+        tbody
+          tr            
+            td
+              strong Email: 
+              = @user.email

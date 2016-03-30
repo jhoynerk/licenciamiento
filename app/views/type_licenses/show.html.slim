@@ -1,0 +1,35 @@
+.row
+  .col-lg-6
+    .widget.p-xl class="#{(@type_license.status)? 'navy-bg' : 'red-bg'}"
+      h2.text-center
+        = @type_license.name
+        strong
+          = fa_icon (@type_license.status)? 'check' : 'remove', class: 'pull-right'
+      ul.list-unstyled.m-t-md
+        li
+          span.fa.fa-envelope.m-r-xs
+          label Duración: 
+          |  #{@type_license.duration}
+        li
+          span.fa.fa-home.m-r-xs
+          label Version: 
+          |  #{@type_license.version}
+        li
+          - if @type_license.status
+            span = fa_icon("toggle-on")
+            label  Estado: 
+            |  Activo
+          - else
+            span = fa_icon("toggle-off")
+            label  Estado: 
+            |  Desactivado
+.row
+  .col-lg-6
+    .col-sm-12.text-center
+      .hr-line-dashed
+      button.btn.btn-danger.btn-outline onClick="javascript:history.go(-1);"
+        i.fa.fa-remove
+        |  Regresar
+      a.btn.btn-primary.btn-outline href="#{edit_type_license_path(@type_license)}"
+        i.fa.fa-check
+        |  Edición

@@ -1,0 +1,35 @@
+h1 Lista de licencias
+
+table.table
+  thead
+    tr
+      th N° Contrato
+      th Producto
+      th Tipo de licencia
+      th Serial
+      th Inicio de la Licencia
+      th
+
+  tbody
+    - @licenses.each do |license|
+      tr
+        td = license.contract.contract
+        td = license.suit.product.name
+        td = license.type_license.name
+        td 
+          - unless license.serial.nil?
+              | Ya tiene serial
+          - else
+              | No tiene serial
+        td = l(license.creation_date, format: :big)
+        td.text-center
+          = link_to fa_icon("search"), license, class: 'btn btn-circle btn-info'
+          = link_to fa_icon("pencil"), edit_license_path(license), class: 'btn btn-circle btn-warning'
+          = link_to fa_icon("trash"), license, data: {:confirm => '¿Estás seguro?'}, :method => :delete, class: 'btn btn-circle btn-danger'
+
+a.btn.btn-success type="button" href="#{new_license_path}"
+  i.fa.fa-plus
+  |  Nuevo cliente
+
+- content_for :javascript
+  = javascript_include_tag 'tables'
