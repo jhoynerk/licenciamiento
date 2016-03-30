@@ -3,7 +3,8 @@ ruby '2.2.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "4.2.4"
-gem 'bootstrap-sass', '~> 3.3.5'
+gem 'bootstrap-sass'
+gem 'sass-rails'
 gem 'font-awesome-rails', '4.5.0.0'
 gem 'ionicons-rails'
 
@@ -11,7 +12,7 @@ gem 'ionicons-rails'
 gem 'pg'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.0'
+
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
