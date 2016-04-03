@@ -3,4 +3,7 @@ class Contract < ActiveRecord::Base
 
   scope :accepted, -> { where(status: LicensesStatus::NEVER_USED) }
   scope :pending, -> { where(status: LicensesStatus::USED) }
+
+  validates :contract, uniqueness: true 
+  validates :contract, presence: true 
 end

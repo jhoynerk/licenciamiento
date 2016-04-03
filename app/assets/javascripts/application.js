@@ -38,3 +38,12 @@
 //= require jit.js
 //= require excanvas.js
 //= require inspinia.js
+$(function(){
+  $.validator.addMethod("RIF", function(value, element) {
+    return this.optional(element) || /^([V|E|G|J|P|N]{1}-\d{7,10})*$/i.test(value);
+  }, "El RIF o Cédula es inválido: Por favor ingresa uno válido. Formato: V-XXXXXXX");
+
+  $.validator.addMethod("telefono", function(value, element) {
+    return this.optional(element) || /^0(412|416|414|424|426|212)-\d{7}$/i.test(value);
+  }, "El teléfono es inválido: Por favor ingresa uno válido. Format: 0212-0123456");
+});

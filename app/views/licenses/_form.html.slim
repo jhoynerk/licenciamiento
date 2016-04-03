@@ -2,6 +2,9 @@
   = form_for @license do |f|
     .row
       .col-lg-6
+        = render 'share/errors', object: f.object 
+    .row
+      .col-lg-6
         .form-group
           = f.fields_for :suit do |suit_fields|
             = suit_fields.label :customer_id, 'Cliente'
@@ -38,6 +41,11 @@
           = f.label :creation_date, 'Inicio de Licencia.'
           = f.text_field :creation_date, class: 'datepicker form-control', placeholder: 'Inicio de Licencia.'
           = f.hidden_field :user_id, value: current_user.id
+    .row
+      .col-lg-6
+        .form-group
+          = f.label :number_computers, 'Licencia para ser usadas en cuantas computadoras?.'
+          = f.number_field :number_computers, class: 'form-control', placeholder: 'Número de computadoras.', within: 1..24
     .row
       .col-lg-6
         .form-group

@@ -27,5 +27,6 @@ Licenciamiento::Application.routes.draw do
 
   post 'users/check_validation', to: 'users#check_validation'
   post '/generar_serial', to: 'licenses#generate_serial'
+  post '/validate_licenses', to: 'licenses#validate_licenses', as: :validate_license
 
 end

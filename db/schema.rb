@@ -11,10 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160338040918) do
+ActiveRecord::Schema.define(version: 20160403211803) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "computers_licenses", force: :cascade do |t|
+    t.integer "license_id"
+    t.string  "ip"
+    t.string  "mac_address"
+    t.boolean "status",      default: true, null: false
+  end
 
   create_table "contracts", force: :cascade do |t|
     t.string   "contract"
@@ -44,9 +51,10 @@ ActiveRecord::Schema.define(version: 20160338040918) do
     t.string   "serial"
     t.date     "creation_date"
     t.integer  "user_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.string   "salt"
+    t.integer  "number_computers"
   end
 
   add_index "licenses", ["contract_id"], name: "index_licenses_on_contract_id", using: :btree

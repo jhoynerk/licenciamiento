@@ -1,7 +1,8 @@
 class LicensesController < ApplicationController
   before_action :set_license, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:generate_serial]
-  skip_before_filter :verify_authenticity_token, :only => [:generate_serial]
+  before_action :authenticate_user!, except: [:generate_serial, :validate_licenses]
+  skip_before_filter :verify_authenticity_token, :only => [:generate_serial, :validate_licenses]
+
   # GET /licenses
   # GET /licenses.json
   def index
@@ -73,6 +74,35 @@ class LicensesController < ApplicationController
     end
   end
 
+  def validate_licenses
+    serial = params[:serial]
+    remote_ip = request.remote_ip
+    license = License.where(serial: serial).first
+    if license.nil?
+      respond_to do |format|
+        format.json { render json: {remote_ip: remote_ip, message: 'Este serial no es valido.', valid: false}, status: :ok}
+      end
+    else
+      license.computers_licenses.build(ip: remote_ip)
+      if license.save
+        respond_to do |format|
+          format.json { render json: {remote_ip: remote_ip, message: 'Este serial es valido.', valid: true}, status: :ok}
+        end
+      else
+        cl = ComputersLicense.where(ip: remote_ip).first 
+        if (serial == cl.license.serial)
+          message = 'Este serial ya se fue activado en este equipo.'
+        else
+          message = 'Usted ya tiene otro serial activo en este equipo.'
+        end
+        respond_to do |format|
+          format.json { render json: {remote_ip: remote_ip, message: message, valid: false}, status: :ok}
+        end
+      end 
+    end
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_license
@@ -81,7 +111,7 @@ class LicensesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def license_params
-      params.require(:license).permit(:type_license_id, :serial, :salt, :creation_date, :user_id,
+      params.require(:license).permit(:type_license_id, :serial, :salt, :creation_date, :user_id, :number_computers,
                                       suit_attributes: [:customer_id, :product_id, :license_id ],
                                       contract_attributes: [:id, :contract, :status])
     end

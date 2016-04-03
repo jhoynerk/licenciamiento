@@ -7,7 +7,9 @@ table.table
       th Cliente
       th Producto
       th Tipo de licencia
-      th Inicio de la Licencia
+      th Inicio de la licencia
+      th Cantidad de equipos por licencia
+      th Licencias activadas 
       th
 
   tbody
@@ -18,6 +20,8 @@ table.table
         td = license.suit.product.name
         td = license.type_license.name
         td = l(license.creation_date, format: :big)
+        td = license.number_computers
+        td = license.computers_licenses.count
         td.text-center
           = link_to fa_icon("search"), license, class: 'btn btn-circle btn-info'
           = link_to fa_icon("pencil"), edit_license_path(license), class: 'btn btn-circle btn-warning'
@@ -25,7 +29,7 @@ table.table
 
 a.btn.btn-success type="button" href="#{new_license_path}"
   i.fa.fa-plus
-  |  Nuevo cliente
+  |  Nueva licencia
 
 - content_for :javascript
   = javascript_include_tag 'tables'
