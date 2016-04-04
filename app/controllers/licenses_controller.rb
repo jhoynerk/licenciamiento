@@ -102,6 +102,21 @@ class LicensesController < ApplicationController
     end
   end
 
+  def remove_computer
+    remote_ip = request.remote_ip
+    computer = ComputersLicense.where(id: remote_ip).first
+    if computer.nil?
+      respond_to do |format|
+        format.json { render json: {message: 'Este compurador no pertenece a ninguna licencia.', valid: false}, status: :ok}
+      end
+    else
+      computer.delete!
+      respond_to do |format|
+        format.json { render json: {message: 'Hemos removido este equipo del listado de computadoras para su licencia.', valid: true}, status: :ok}
+      end
+    end
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
