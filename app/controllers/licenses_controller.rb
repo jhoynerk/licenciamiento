@@ -1,7 +1,7 @@
 class LicensesController < ApplicationController
   before_action :set_license, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:generate_serial, :validate_licenses]
-  skip_before_filter :verify_authenticity_token, :only => [:generate_serial, :validate_licenses]
+  before_action :authenticate_user!, except: [:generate_serial, :validate_licenses, :remove_computer]
+  skip_before_filter :verify_authenticity_token, :only => [:generate_serial, :validate_licenses, :remove_computer]
 
   # GET /licenses
   # GET /licenses.json
@@ -57,7 +57,8 @@ class LicensesController < ApplicationController
   # DELETE /licenses/1
   # DELETE /licenses/1.json
   def destroy
-    @license.destroy
+    @license.contract.status = LicensesStatus::CANCELED
+    @license.save!
     respond_to do |format|
       format.html { redirect_to licenses_url }
       format.json { head :no_content }
@@ -79,44 +80,93 @@ class LicensesController < ApplicationController
     remote_ip = request.remote_ip
     license = License.where(serial: serial).first
     if license.nil?
-      respond_to do |format|
-        format.json { render json: {remote_ip: remote_ip, message: 'Este serial no es valido.', valid: false}, status: :ok}
-      end
+      message = 'Este serial no es valido.'
+      valid = false
     else
-      license.computers_licenses.build(ip: remote_ip)
-      if license.save
-        respond_to do |format|
-          format.json { render json: {remote_ip: remote_ip, message: 'Este serial es valido.', valid: true}, status: :ok}
+      if (license.contract.status != LicensesStatus::CANCELED)
+        if (license.computers_licenses.active.count < license.number_computers )
+          if (license.computers_licenses.count == 0)
+            license.contract.status = LicensesStatus::USED
+          end
+          license.computers_licenses.build(ip: remote_ip, status: ComputerStatus::ON)
+          if license.save
+            message = 'Ha sido activado exitosamente este serial, en este equipo.'
+            valid = true
+          else
+            cl = ComputersLicense.where(ip: remote_ip).first
+            valid = false
+            if cl.status != ComputerStatus::BANEO
+              if (serial == cl.license.serial)
+                if cl.status == ComputerStatus::OFF
+                  cl.status = ComputerStatus::ON
+                  cl.save!
+                  message = 'Volvimos activar este serial este equipo.'
+                  valid = true
+                else
+                  message = 'Este serial ya se fue activado en este equipo.'
+                end
+              else
+                message = 'Usted ya tiene otro serial activo en este equipo.'
+              end
+            else
+              message = 'Este equipo ha sido bloqueado para asignar licencias, comuniquese con la empresa para mayor información.'
+            end
+          end 
+        else
+          message = "Usted esta al limite de equipos que puede asociar a esta licencia."
+          valid = false
         end
       else
-        cl = ComputersLicense.where(ip: remote_ip).first 
-        if (serial == cl.license.serial)
-          message = 'Este serial ya se fue activado en este equipo.'
-        else
-          message = 'Usted ya tiene otro serial activo en este equipo.'
-        end
-        respond_to do |format|
-          format.json { render json: {remote_ip: remote_ip, message: message, valid: false}, status: :ok}
-        end
-      end 
+        message = "Esta licencia ha sido cancelada. Comuiquese con la empresa!"
+        valid = false
+      end
+    end
+    respond_to do |format|
+      format.json { render json: {remote_ip: remote_ip, message: message, valid: valid}, status: :ok}
     end
   end
 
   def remove_computer
     remote_ip = request.remote_ip
-    computer = ComputersLicense.where(id: remote_ip).first
+    computer = ComputersLicense.where(ip: remote_ip).first
     if computer.nil?
       respond_to do |format|
-        format.json { render json: {message: 'Este compurador no pertenece a ninguna licencia.', valid: false}, status: :ok}
+        format.json { render json: {message: 'Este computador no pertenece a ninguna licencia.', valid: false}, status: :ok}
       end
     else
-      computer.delete!
-      respond_to do |format|
-        format.json { render json: {message: 'Hemos removido este equipo del listado de computadoras para su licencia.', valid: true}, status: :ok}
+      if (computer.status == ComputerStatus::BANEO)
+        respond_to do |format|
+          format.json { render json: {message: 'Este equipo ha sido bloqueado para asignar licencias, comuniquese con la empresa para mayor información.', valid: false}, status: :ok}
+        end
+      else
+        computer.status = ComputerStatus::OFF
+        computer.save!
+        respond_to do |format|
+          format.json { render json: {message: 'Hemos removido este equipo del listado de computadoras para su licencia.', valid: true}, status: :ok}
+        end
       end
     end
   end
 
+  def remover_equipo
+    computer = ComputersLicense.find(params[:id])
+    computer.status = ComputerStatus::BANEO
+    computer.save!
+    respond_to do |format|
+      format.html { redirect_to :back, notice: 'Se ha removido un equipo asignado a esta licencia.!' }
+      format.json { head :no_content }
+    end
+  end
+
+  def reanudar_equipo
+    computer = ComputersLicense.find(params[:id])
+    computer.status = ComputerStatus::OFF
+    computer.save!
+    respond_to do |format|
+      format.html { redirect_to :back, notice: 'Se ha removido un equipo asignado a esta licencia.!' }
+      format.json { head :no_content }
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

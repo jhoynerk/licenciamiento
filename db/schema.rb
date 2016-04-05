@@ -17,10 +17,12 @@ ActiveRecord::Schema.define(version: 20160403211803) do
   enable_extension "plpgsql"
 
   create_table "computers_licenses", force: :cascade do |t|
-    t.integer "license_id"
-    t.string  "ip"
-    t.string  "mac_address"
-    t.boolean "status",      default: true, null: false
+    t.integer  "license_id"
+    t.string   "ip"
+    t.string   "mac_address"
+    t.integer  "status",      default: 0
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "contracts", force: :cascade do |t|

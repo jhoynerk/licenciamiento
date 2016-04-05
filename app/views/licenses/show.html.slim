@@ -31,6 +31,18 @@
               label Inicio: 
             td
               |  #{l(@license.creation_date, format: :big)}
+          tr
+            td
+              span.fa.fa-barcode.m-r-xs
+              label Serial: 
+            td
+              |  #{@license.serial}
+          tr
+            td
+              span.fa.fa-calculator.m-r-xs
+              label Computadora para asignar: 
+            td
+              |  #{@license.number_computers}
           - if @license.contract.status
             tr
               td
@@ -45,6 +57,36 @@
                 label  Estado: 
               td
                 |  Desactivado
+  .col-lg-6.col-lg-offset-3
+    .ibox.float-e-margins
+      .ibox-content.ibox-heading.text-center
+        h3
+          i.fa.fa-certificate
+          | Equipos conectados
+      .ibox-content.no-padding
+        table.table.table-hover.no-margins
+          - if @license.computers_licenses.any?
+              thead
+                tr 
+                  th IP
+                  th Fecha de activación
+                  th 
+              tbody
+                - @license.computers_licenses.each do |c|
+                    tr class="#{class_status(c.status)}"
+                      td = c.ip
+                      td = l(c.created_at, format: :big)
+                      td
+                        - if c.status == ComputerStatus::ON
+                          = link_to 'Suspender', remover_equipo_path(id: c.id), data: {:confirm => '¿Estás seguro que quieres suspender este equipo?'}, :method => :post, class: 'btn btn-danger'
+                        - if c.status == ComputerStatus::BANEO
+                          = link_to 'Reanudar', reanudar_equipo_path(id: c.id), data: {:confirm => '¿Estás seguro que quieres reanudar este equipo?'}, :method => :post, class: 'btn btn-success'
+                tr data-href="#{licenses_path}"
+                  td colspan="3"
+                    | Ver todos
+          - else
+              li.list-group-item
+                p.text-center Por ahora, no hay equipos conectados!
 .row
   .col-lg-6.col-lg-offset-3
     .col-sm-12.text-center
@@ -52,6 +94,9 @@
       button.btn.btn-danger.btn-outline onClick="javascript:history.go(-1);"
         i.fa.fa-remove
         |  Regresar
+      a.btn.btn-warning.btn-outline href="#{licenses_path}"
+        i.fa.fa-list
+        |  Lista de Licencias
       a.btn.btn-primary.btn-outline href="#{edit_license_path(@license)}"
         i.fa.fa-check
         |  Edición

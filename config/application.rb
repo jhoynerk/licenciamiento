@@ -24,5 +24,7 @@ module Licenciamiento
     config.i18n.default_locale = 'es-VE'
     config.web_console.whitelisted_ips = '192.168.1.105/07'
     config.web_console.whiny_requests = false
+    config.time_zone = 'Caracas'
+    config.active_record.default_timezone = :local
   end
 end

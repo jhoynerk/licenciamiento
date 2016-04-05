@@ -4,7 +4,8 @@ class CreateComputersLicenses < ActiveRecord::Migration
       t.belongs_to :license
       t.string :ip
       t.string :mac_address
-      t.boolean :status, default: true, null: false
+      t.integer :status, default: 0
+      t.timestamps null: false
     end
   end
 end
