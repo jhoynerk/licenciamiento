@@ -31,4 +31,9 @@ Licenciamiento::Application.routes.draw do
   post '/remove_licenses', to: 'licenses#remove_computer', as: :remove_licenses
   post '/remover_equipo', to: 'licenses#remover_equipo', as: :remover_equipo
   post '/reanudar_equipo', to: 'licenses#reanudar_equipo', as: :reanudar_equipo
+
+
+  get '/reports_date', to: 'reports#date', as: :report_date
+  get '/reports_expired', to: 'reports#expired', as: :report_expired
+  #get '/reports_expired', to: 'dashboard#index', as: :dashboard
 end

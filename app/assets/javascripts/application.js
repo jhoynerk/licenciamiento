@@ -38,6 +38,7 @@
 //= require jit.js
 //= require excanvas.js
 //= require inspinia.js
+//= require jquery.printelement.js
 $(function(){
   $.validator.addMethod("RIF", function(value, element) {
     return this.optional(element) || /^([V|E|G|J|P|N]{1}-\d{7,10})*$/i.test(value);

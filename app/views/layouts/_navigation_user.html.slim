@@ -36,7 +36,7 @@ nav.navbar-default.navbar-static-side role="navigation"
           li
             = link_to 'Nuevo Tipo de licencia', new_type_license_path
           li
-            = link_to 'Lista Tipos de licencias', type_licenses_path      
+            = link_to 'Lista Tipos de licencias', type_licenses_path
       li class="#{active_class('/licenses')}"
         a href="#"
           i.fa.fa-certificate
@@ -47,6 +47,14 @@ nav.navbar-default.navbar-static-side role="navigation"
             = link_to 'Nueva Licencia', new_license_path
           li
             = link_to 'Lista de Licencias', licenses_path
-
-          
+      li class="#{active_class('/reports')}"
+        a href="#"
+          i.fa.fa-file-pdf-o
+          span.nav-label Reportes
+          span.fa.arrow
+        ul.nav.nav-second-level.collapse
+          li
+            = link_to 'Licencias vencidas', report_expired_path
+          li
+            = link_to 'Licencias por fecha', report_date_path
 
