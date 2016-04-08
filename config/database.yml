@@ -12,7 +12,7 @@ default: &default
 #   gem 'sqlite3'
 development:
   <<: *default  
-  database: licenciamiento_dev
+  database: vagrant
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -20,11 +20,11 @@ development:
 test: &test
   <<: *default
   encoding: unicode
-  database: licenciamiento_test  
+  database: vagrant_test  
 
 production:
   <<: *default
-  database: licenciamiento_production
+  database: vagrant_production
 
 # SQLite version 3.x
 #   gem install sqlite3
