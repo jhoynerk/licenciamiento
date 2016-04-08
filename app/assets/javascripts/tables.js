@@ -11,7 +11,7 @@
 //= require dataTables/dataTables.tableTools.min.js
 
 $(document).ready(function(){
-  $('.table').dataTable({
+  $('.tables').dataTable({
     language: { 
               "sProcessing":     "Procesando...",
               "sLengthMenu":     "Mostrar _MENU_ registros",

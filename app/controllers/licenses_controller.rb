@@ -80,7 +80,10 @@ class LicensesController < ApplicationController
     remote_ip = request.remote_ip
     license = License.where(serial: serial).first
     if license.nil?
-      message = 'Este serial no es valido.'
+      message = 'Este serial no es valido, comuniquese con Softech Consultores C. A.'
+      valid = false
+    elsif Date.today > ( license.creation_date.to_date + license.type_license.duration.month)
+      message = 'Este serial ya está vencido, comuniquese con Softech Consultores C. A.'
       valid = false
     else
       if (license.contract.status != LicensesStatus::CANCELED)

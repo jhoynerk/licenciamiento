@@ -10,4 +10,11 @@ class License < ActiveRecord::Base
   validates :serial, uniqueness: true
   validates :serial, :creation_date, :type_license_id, :number_computers, presence: true
 
+  def self.expired 
+    expired = []
+    all.each do |l|
+      expired << l if Date.today > ( l.creation_date.to_date + l.type_license.duration.month)
+    end
+    expired
+  end
 end
