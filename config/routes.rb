@@ -1,4 +1,4 @@
-Licenciamiento::Application.routes.draw do  
+Licenciamiento::Application.routes.draw do
   root 'dashboard#test'
   resources :licenses
   resources :contracts
@@ -6,7 +6,7 @@ Licenciamiento::Application.routes.draw do
   resources :type_licences
   resources :products
   resources :customers
-  devise_for :users
+  devise_for :users, skip: :registrations
 
   devise_scope :user do
     authenticated :user do

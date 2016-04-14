@@ -2,7 +2,7 @@
   .col-lg-6.col-lg-offset-3
     .widget.p-xl class="#{(@license.contract.status)? 'navy-bg' : 'red-bg'}"
       h2.text-center
-        = @license.suit.customer.business_name 
+        = link_to @license.suit.customer.business_name, @license.suit.customer, class: 'text-white'
         strong
           = fa_icon (@license.contract.status)? 'check' : 'remove', class: 'pull-right'
       table.table.table-pg
@@ -10,51 +10,51 @@
           tr
             td
               span.fa.fa-barcode.m-r-xs
-              label N° de Contrato: 
+              label N° de Contrato:
             td
               |  #{@license.contract.contract}
           tr
             td
               span.fa.fa-cog.m-r-xs
-              label Tipo de Licencia: 
+              label Tipo de Licencia:
             td
               |  #{@license.type_license.name}
           tr
             td
               span.fa.fa-calendar-o.m-r-xs
-              label Duración de Licencia: 
+              label Duración de Licencia:
             td
               |  #{@license.type_license.duration} Meses
           tr
             td
               span.fa.fa-calendar-times-o.m-r-xs
-              label Inicio: 
+              label Inicio:
             td
               |  #{l(@license.creation_date, format: :big)}
           tr
             td
               span.fa.fa-barcode.m-r-xs
-              label Serial: 
+              label Serial:
             td
               |  #{@license.serial}
           tr
             td
               span.fa.fa-calculator.m-r-xs
-              label Computadora para asignar: 
+              label Computadora para asignar:
             td
               |  #{@license.number_computers}
           - if @license.contract.status
             tr
               td
                 span = fa_icon("check-square", class: 'm-r-xs')
-                label Estado: 
+                label Estado:
               td
                 |  #{@license.contract.status_humanize}
           - else
             tr
               td
                 span = fa_icon("check-square", class: 'm-r-xs')
-                label  Estado: 
+                label  Estado:
               td
                 |  Desactivado
   .col-lg-6.col-lg-offset-3
@@ -67,10 +67,10 @@
         table.table.table-hover.no-margins
           - if @license.computers_licenses.any?
               thead
-                tr 
+                tr
                   th IP
                   th Fecha de activación
-                  th 
+                  th
               tbody
                 - @license.computers_licenses.each do |c|
                     tr class="#{class_status(c.status)}"

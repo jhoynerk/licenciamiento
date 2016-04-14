@@ -2,6 +2,7 @@ class LicensesController < ApplicationController
   before_action :set_license, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:generate_serial, :validate_licenses, :remove_computer]
   skip_before_filter :verify_authenticity_token, :only => [:generate_serial, :validate_licenses, :remove_computer]
+  before_action :can_access, only: [:destroy]
 
   # GET /licenses
   # GET /licenses.json
@@ -114,7 +115,7 @@ class LicensesController < ApplicationController
             else
               message = 'Este equipo ha sido bloqueado para asignar licencias, comuniquese con la empresa para mayor información.'
             end
-          end 
+          end
         else
           message = "Usted esta al limite de equipos que puede asociar a esta licencia."
           valid = false
@@ -140,6 +141,10 @@ class LicensesController < ApplicationController
       if (computer.status == ComputerStatus::BANEO)
         respond_to do |format|
           format.json { render json: {message: 'Este equipo ha sido bloqueado para asignar licencias, comuniquese con la empresa para mayor información.', valid: false}, status: :ok}
+        end
+      elsif (computer.status == ComputerStatus::OFF)
+        respond_to do |format|
+          format.json { render json: {message: 'Este equipo ya fue removido del listado de computadoras de su licencia.', valid: false}, status: :ok}
         end
       else
         computer.status = ComputerStatus::OFF

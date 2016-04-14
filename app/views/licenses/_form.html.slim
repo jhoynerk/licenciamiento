@@ -2,7 +2,7 @@
   = form_for @license do |f|
     .row
       .col-lg-6
-        = render 'share/errors', object: f.object 
+        = render 'share/errors', object: f.object
     .row
       .col-lg-6
         .form-group
@@ -39,17 +39,17 @@
       .col-lg-6
         .form-group
           = f.label :creation_date, 'Inicio de Licencia.'
-          = f.text_field :creation_date, class: 'datepicker form-control', placeholder: 'Inicio de Licencia.'
+          = f.text_field :creation_date, class: 'datepicker form-control', placeholder: 'Inicio de Licencia.', value: "#{ l(@license.creation_date.to_date, formats: :default) if @license.creation_date.present?}"
           = f.hidden_field :user_id, value: current_user.id
     .row
       .col-lg-6
         .form-group
-          = f.label :number_computers, 'Licencia para ser usadas en cuantas computadoras?.'
+          = f.label :number_computers, 'Capacidad de equipos para esta licencia.'
           = f.number_field :number_computers, class: 'form-control', placeholder: 'Número de computadoras.', within: 1..24
     .row
       .col-lg-6
         .form-group
-          button#loading-btn.btn.btn-white.btn-sm type="button" 
+          button#loading-btn.btn.btn-white.btn-sm type="button"
             i.fa.fa-refresh
               |  Generar Serial
     .row#load_serial_inputs style="display:none"

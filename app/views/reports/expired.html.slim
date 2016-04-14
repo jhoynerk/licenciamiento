@@ -9,7 +9,8 @@ table.tables
       th Tipo de licencia
       th Inicio de la licencia
       th Cantidad de equipos por licencia
-      th Licencias activadas 
+      th Licencias activadas
+      th Fecha de vencimiento
       th
 
   tbody
@@ -22,22 +23,23 @@ table.tables
         td = l(license.creation_date, format: :big)
         td = license.number_computers
         td = license.computers_licenses.active.count
+        td = l(license.creation_date + license.type_license.duration.month, format: :big)
         td.text-center
           = link_to fa_icon("search"), license, class: 'btn btn-circle btn-info'
 
 /! Button trigger modal
-button.btn.btn-primary.btn-lg data-target="#myModal" data-toggle="modal" type="button" 
+button.btn.btn-primary.btn-lg data-target="#myModal" data-toggle="modal" type="button"
   | Ver reporte
-/! Modalmodal fade 
-#myModal.modal.fade.bs-example-modal-lg aria-labelledby="myModalLabel" role="dialog" tabindex="-1" 
-  .modal-dialog.modal-lg role="document" 
+/! Modalmodal fade
+#myModal.modal.fade.bs-example-modal-lg aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
+  .modal-dialog.modal-lg role="document"
     .modal-content#imprimir
       .modal-header
-        button.close aria-label="Close" data-dismiss="modal" type="button" 
+        button.close aria-label="Close" data-dismiss="modal" type="button"
           span aria-hidden="true"  &times;
         h4#myModalLabel.modal-title Lista de licencias vencidas
       .modal-body
-        table.table.table-striped
+        table.tables.table.table-striped
           thead
             tr
               th N° Contrato
@@ -47,6 +49,7 @@ button.btn.btn-primary.btn-lg data-target="#myModal" data-toggle="modal" type="b
               th Inicio de la licencia
               th Cantidad de equipos por licencia
               th Licencias activadas
+              th Fecha de vencimiento
 
           tbody
             - @licenses.each do |license|
@@ -58,6 +61,7 @@ button.btn.btn-primary.btn-lg data-target="#myModal" data-toggle="modal" type="b
                 td = l(license.creation_date, format: :big)
                 td = license.number_computers
                 td = license.computers_licenses.active.count
+                td = l(license.creation_date + license.type_license.duration.month, format: :big)
       .modal-footer
         button.btn.btn-default data-dismiss="modal" type="button" Cerrar
         button.btn.btn-primary#print type="button" Imprimir

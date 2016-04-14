@@ -1,26 +1,40 @@
-.row.wrapper.border-bottom.white-bg.page-heading
-  .col-sm-4
-    h2 Usuarios
-    ol.breadcrumb
-      li
-        = link_to 'Inicio', dashboard_path 
-      li
-        = link_to 'Lista de Usuarios', users_path
-      li.active
-        strong = @user.complete_name
-.wrapper.wrapper-content.animated.fadeInRight        
-  .row.m-b-lg.m-t-lg
-    .col-md-6      
-      .profile-info
-        div
-          div
-            h2.no-margins
-              = @user.complete_name
-            h4        
-    .col-md-6
-      table.table.small.m-b-xs
+.row
+  .col-lg-6.col-lg-offset-3
+    .widget.p-xl.navy-bg
+      h2.text-center
+        strong = @user.first_name
+        strong
+          = fa_icon 'check', class: 'pull-right'
+      table.table.table-pg
         tbody
-          tr            
+          tr
             td
-              strong Email: 
-              = @user.email
+              span.fa.fa-home.m-r-xs
+              label Apellido:
+            td
+              |  #{@user.last_name}
+          tr
+            td
+              span.fa.fa-envelope.m-r-xs
+              label Email:
+            td
+              |  #{mail_to @user.email}
+          tr
+            td
+              span.fa.fa-table.m-r-xs
+              label Tipo de usuario:
+            td
+              = (@user.admin?) ? 'Administrador' : 'Analista'
+.row
+  .col-lg-6.col-lg-offset-3
+    .col-sm-12.text-center
+      .hr-line-dashed
+      button.btn.btn-danger.btn-outline onClick="javascript:history.go(-1);"
+        i.fa.fa-remove
+        |  Regresar
+      a.btn.btn-warning.btn-outline href="#{users_path}"
+        i.fa.fa-list
+        |  Lista de usuarios
+      a.btn.btn-primary.btn-outline href="#{edit_user_path(@user)}"
+        i.fa.fa-check
+        |  Edición

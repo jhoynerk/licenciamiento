@@ -1,6 +1,7 @@
 class CustomersController < ApplicationController
   before_action :set_customer, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  before_action :can_access, only: [:destroy]
   # GET /customers
   # GET /customers.json
   def index
@@ -54,7 +55,8 @@ class CustomersController < ApplicationController
   # DELETE /customers/1
   # DELETE /customers/1.json
   def destroy
-    @customer.destroy
+    @customer.status = 0
+    @customer.save!
     respond_to do |format|
       format.html { redirect_to customers_url }
       format.json { head :no_content }

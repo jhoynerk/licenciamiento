@@ -1,155 +1,115 @@
 .row.white-bg
-  .col-md-3
-    .widget.p-xs.text-center
-      .m-b-md
-        i.fa.fa-user.fa-4x
-        h1.m-xs n1
-        h3.font-bold.no-margins
-          | Empleados
-        small Con perfil incompleto
-  .col-lg-3
-    .widget.p-xs.text-center
-      .m-b-md
-        i.fa.fa-bed.fa-4x
-        h1.m-xs n2
-        h3.font-bold.no-margins
-          | Empleados
-        small Ausentes
-  .col-lg-3
-    .widget.p-xs.text-center
-      .m-b-md
-        i.fa.fa-plane.fa-4x
-        h1.m-xs 0
-        h3.font-bold.no-margins
-          | Solicitudes
-        small De vacaciones
-  .col-lg-3
-    .widget.p-xs.text-center
-      .m-b-md
-        i.fa.fa-credit-card.fa-4x
-        h1.m-xs 0
-        h3.font-bold.no-margins
-          | Beneficios
-        small Recientes.
-
+  .col-xs-6.col-md-offset-1.col-md-5
+    .float-e-margins
+      .text-center.p-md
+        .text-center
+          i.fa.fa-group.fa-4x.text-navy
+          h1.m-xs = Customer.count
+          h3.font-bold.no-margins
+            | Clientes
+          small hasta los momentos
+  .col-xs-6.col-md-5
+    .float-e-margins
+      .text-center.p-md
+        .text-center
+          i.fa.fa-certificate.fa-4x.mostasa
+          h1.m-xs = License.count
+          h3.font-bold.no-margins
+            | Licencias
+          small hasta los momentos
 .row
-  .col-md-12
-    .wrapper.wrapper-content
+  .col-lg-12
+    .wrapper.wrapper-content.animated.fadeInRight
       .row
-        .col-md-12
+        .col-lg-4
           .ibox.float-e-margins
             .ibox-content.ibox-heading.text-center
               h3
-                i.fa.fa-newspaper-o
-                |  Eventos laborales 
+                i.fa.fa-laptop
+                |  Productos
               small
                 i.fa.fa-stack-exchange
-                |  Lista de empleados que aun no completan su información.
-            .ibox-content
+                |  Lista de productos que se encuentran disponibles
+            .ibox-content.no-padding
               table.table.table-hover.no-margins
-                thead
-                  tr
-                    th Foto
-                    th Fecha
-                    th Empleado
-                    th Tipo de Evento
-                tbody
-                  / - @events.each do |e|
-                  /     tr
-                  /       td
-                  /         = image_tag(e.employee.photo_url, size:'30x30',class:'img-circle m-t-xs img-responsive')
-                  /       td
-                  /         i.fa.fa-calendar 
-                  /         = " #{e.date}"
-                  /       td = e.employee.complete_name
-                  /       - if e.name == 'Fin de contrato'
-                  /           td.text-danger
-                  /             i.fa.fa-hourglass-end
-                  /             = " #{e.name}"
-                  /       - else
-                  /           td.text-navy
-                  /             i.fa.fa-birthday-cake
-                  /             = " #{e.name}"
-                  
-      .row
+                - if @products.any?
+                    thead
+                      tr
+                        th Nombre
+                        th Version
+                    tbody
+                      - @products.each do |p|
+                          tr class="#{(p.status) ? 'success' : 'danger'}" data-href="#{product_path(p)}"
+                            td = p.name
+                            td
+                              i.fa.fa-code
+                              = " #{p.version}"
+                      tr data-href="#{products_path}"
+                        td colspan="3"
+                          | Ver todos
+                - else
+                    li.list-group-item
+                      p.text-center Por el momento, no hay productos recientes
         .col-lg-4
           .ibox.float-e-margins
             .ibox-content.ibox-heading.text-center
               h3
-                i.fa.fa-user
-                |  Perfil Incompleto
+                i.fa.fa-certificate
+                |  Licencias adquiridas
               small
                 i.fa.fa-stack-exchange
-                |  Lista de empleados que aun no completan su información.
+                |  Lista de las ultimas licencias que fueron adquiridas
             .ibox-content.no-padding
-              ul.list-group
-                / - if @company.incomplete_profiles.any?
-                /   - @company.incomplete_profiles.each do |e|
-                /       li.list-group-item
-                /         p
-                /           a.text-info href="#" = e.complete_name
-                /           =  " aun no completa su perfil puedes escribirle a #{e.email} y su Jefe es: #{e.boss.complete_name}"
-                /         small.block.text-muted
-                /           i.fa.fa-clock-o
-                /           |  Registrado el:
-                /           strong = " #{e.created_at.strftime('%d-%m-%Y')}"
-                / - else
-                /     li.list-group-item
-                /       p.text-center No hay perfiles incompletos. Felicidades!
+              table.table.table-hover.no-margins
+                - if @licenses.any?
+                    thead
+                      tr
+                        th Producto
+                        th Cliente
+                        th Inicio
+                    tbody
+                      - @licenses.each do |c|
+                          tr class="#{(c.contract.status) ? 'success' : 'danger'}" data-href="#{license_path(c)}"
+                            td = c.suit.product.name
+                            td = c.suit.customer.business_name
+                            td = l(c.creation_date, format: :short).titleize
+                      tr data-href="#{licenses_path}"
+                        td colspan="3"
+                          | Ver todos
+                - else
+                    li.list-group-item
+                      p.text-center Por ahora, no hay licencias adquiridas
+        .col-lg-4
+          .ibox.float-e-margins
+            .ibox-content.ibox-heading.text-center
+              h3
+                i.fa.fa-check-square-o
+                |  Ultimos Clientes
+              small
+                i.fa.fa-stack-exchange
+                |  Lista de los últimos clientes.
+            .ibox-content.no-padding
+              table.table.table-hover.no-margins
+                - if @customers.any?
+                    thead
+                      tr
+                        th Nombre
+                        th Rif
+                        th N° Licencias
+                    tbody
+                      - @customers.each do |c|
+                          tr class="#{(c.status) ? 'success' : 'danger'}" data-href="#{customer_path(c)}"
+                            td = c.business_name
+                            td = c.rif
+                            td = c.suits.count
+                      tr data-href="#{customers_path}"
+                        td colspan="3"
+                          | Ver Todas
+                - else
+                    li.list-group-item
+                      p.text-center Por ahora, no tenemos clientes disponibles
 
-        .col-lg-4
-          .ibox.float-e-margins
-            .ibox-content.ibox-heading.text-center
-              h3
-                i.fa.fa-plane
-                |  De Vacaciones
-              small
-                i.fa.fa-stack-exchange
-                |  Empleados de vacaciones ahora mismo.
-            .ibox-content.no-padding
-              ul.list-group
-                / - if @vacations.any?
-                /   - @vacations.each do |v|
-                /       li.list-group-item
-                /         p
-                /           a.text-info href="#" Ausente por vacaciones: 
-                /           = " #{v.employee.complete_name}, #{v.employee.workstation.name} "
-                /         small.block.text-muted
-                /           i.fa.fa-clock-o
-                /           span 
-                /             |  Desde el  
-                /             strong = v.start_date
-                /             |  al  
-                /             strong = v.end_date
-                / - else
-                /     li.list-group-item
-                /       p.text-center No hay nadie ausente, todos estamos trabando :)
-
-        .col-lg-4
-          .ibox.float-e-margins
-            .ibox-content.ibox-heading.text-center
-              h3
-                i.fa.fa-clock-o
-                |  Solicitudes Pendientes
-              small
-                i.fa.fa-stack-exchange
-                |  Solicitudes de vacaciones pendientes por aprobar/negar.
-            .ibox-content.no-padding
-              ul.list-group
-                / - if @vacations_pending.any?
-                /   - @vacations_pending.each do |v|
-                /     li.list-group-item
-                /       p
-                /         = link_to company_vacations_path(@company), class:'text-info'
-                /           | Solicitud de: 
-                /         = " #{v.employee.complete_name}, #{v.employee.workstation.name} "
-                /       small.block.text-muted
-                /         i.fa.fa-clock-o
-                /         span 
-                /           |  Desde el  
-                /           strong = v.start_date
-                /           |  al  
-                /           strong = v.end_date
-                / - else
-                  li.list-group-item
-                    p.text-center No hay solicitudes pendientes
+javascript:
+  $(".table tr").click(function() {
+    window.location.href = $(this).data("href");
+  });

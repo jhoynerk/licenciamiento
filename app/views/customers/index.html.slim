@@ -27,7 +27,7 @@ table.tables.table-responsive
         td.text-center
           = link_to fa_icon("search"), customer, class: 'btn btn-circle btn-info'
           = link_to fa_icon("pencil"), edit_customer_path(customer), class: 'btn btn-circle btn-warning'
-          = link_to fa_icon("trash"), customer, data: {:confirm => '¿Estás seguro?'}, :method => :delete, class: 'btn btn-circle btn-danger'
+          = link_to fa_icon("trash"), customer, data: {:confirm => '¿Estás seguro?'}, :method => :delete, class: 'btn btn-circle btn-danger' if current_user.admin?
 a.btn.btn-success type="button" href="#{new_customer_path}"
   i.fa.fa-plus
   |  Nuevo cliente

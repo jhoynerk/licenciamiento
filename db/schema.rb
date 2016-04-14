@@ -104,7 +104,7 @@ ActiveRecord::Schema.define(version: 20160403211803) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "work"
-    t.boolean  "status"
+    t.boolean  "status",                 default: false, null: false
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
   end

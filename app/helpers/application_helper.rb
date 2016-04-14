@@ -18,4 +18,13 @@ module ApplicationHelper
         "danger"
     end
   end
+
+  def separate_class(count)
+    case count
+      when 1
+        "col-lg-8 col-lg-offset-2"
+      else
+        "col-lg-6"
+    end
+  end
 end

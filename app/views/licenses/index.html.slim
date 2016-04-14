@@ -27,7 +27,7 @@ table.tables
         td.text-center
           = link_to fa_icon("search"), license, class: 'btn btn-circle btn-info'
           = link_to fa_icon("pencil"), edit_license_path(license), class: 'btn btn-circle btn-warning'
-          = link_to fa_icon("trash"), license, data: {:confirm => '¿Estás seguro?'}, :method => :delete, class: 'btn btn-circle btn-danger'
+          = link_to fa_icon("trash"), license, data: {:confirm => '¿Estás seguro?'}, :method => :delete, class: 'btn btn-circle btn-danger' if current_user.admin?
 
 a.btn.btn-success type="button" href="#{new_license_path}"
   i.fa.fa-plus

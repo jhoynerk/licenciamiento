@@ -5,7 +5,12 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   has_many :customers
   has_many :licenses
-  
+
+  validates :email, uniqueness: true
+  validates :password, presence: true, on: :create
+  validates :password, confirmation: true, on: :create
+
+
   def complete_name
     (last_name + ' ' + first_name).titleize
   end

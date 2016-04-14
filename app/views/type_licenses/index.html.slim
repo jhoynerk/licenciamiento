@@ -6,8 +6,8 @@ table.tables
       th Nombre
       th Duración
       th Version
-      th Habilitada
       th N° de Licencias
+      th Habilitada
       th
 
   tbody
@@ -27,7 +27,7 @@ table.tables
         td.text-center
           = link_to fa_icon("search"), type_license, class: 'btn btn-circle btn-info'
           = link_to fa_icon("pencil"), edit_type_license_path(type_license), class: 'btn btn-circle btn-warning'
-          = link_to fa_icon("trash"), type_license, data: {:confirm => '¿Estás seguro?'}, :method => :delete, class: 'btn btn-circle btn-danger'
+          = link_to fa_icon("trash"), type_license, data: {:confirm => '¿Estás seguro?'}, :method => :delete, class: 'btn btn-circle btn-danger' if current_user.admin?
 
 a.btn.btn-success type="button" href="#{new_type_license_path}"
   i.fa.fa-plus

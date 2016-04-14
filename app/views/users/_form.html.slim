@@ -1,0 +1,69 @@
+.ibox-content
+  = form_for @user, :html => {class: 'form-user'} do |f|
+    .row
+      .col-lg-6
+        = render 'share/errors', object: f.object
+    .row
+      .col-lg-6
+        .form-group
+          = f.label :first_name, 'Nombre:'
+          = f.text_field :first_name, class: 'form-control', placeholder: 'Nombre', required: true
+    .row
+      .col-lg-6
+        .form-group
+          = f.label :last_name, 'Apellido:'
+          = f.text_field :last_name, class: 'form-control', placeholder: 'Apellido', required: true
+    .row
+      .col-lg-6
+        .form-group
+          = f.label :email, 'Correo eléctrónico:'
+          = f.email_field :email, class: 'form-control', placeholder: 'Correo eléctrónico', required: true
+    .row
+      .col-lg-6
+        .form-group
+          = f.label :password, 'Contraseña:'
+          = f.password_field :password, class: 'form-control', placeholder: 'Contraseña'
+    .row
+      .col-lg-6
+        .form-group
+          = f.label :password_confirmation, 'Repetir contraseña:'
+          = f.password_field :password_confirmation, class: 'form-control', placeholder: 'Contraseña'
+    .form-group
+      label Estado del cliente
+      .checkbox.checkbox-circle
+        = f.check_box :admin
+        = f.label :admin, 'Habilitar permisos de administrador'
+    .form-group
+      label Estado del cliente
+      .checkbox.checkbox-circle
+        = f.check_box :status
+        = f.label :status, 'Activar el uso de esta cuenta'
+    .row
+      .col-lg-6.text-center
+        .hr-line-dashed
+        button.btn.btn-danger.btn-outline onClick="javascript:history.go(-1);"
+          i.fa.fa-remove
+          |  Cancelar
+        button.btn.btn-primary.btn-outline type='submit'
+          i.fa.fa-check
+          |  Enviar
+
+javascript:
+  $(document).ready(function(){
+    $(".form-user").validate({
+      rules: {
+        'user[email]': {
+          required: true,
+          email: true
+        },
+        'user[password]': {
+          minlength: 8
+        },
+        'user[password_confirmation]': {
+          equalTo: "#user_password"
+        }
+      }
+    });
+  });
+
+

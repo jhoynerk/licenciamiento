@@ -1,5 +1,6 @@
 class ReportsController < ApplicationController
   before_action :authenticate_user!
+  before_action :can_access, only: [:destroy]
   def expired
     @licenses = License.expired
   end

@@ -1,5 +1,5 @@
 class DashboardController < ApplicationController
-  before_action :authenticate_user!  
+  before_action :authenticate_user!
   def index
     @products = Product.last(8)
     @licenses = License.last(8)

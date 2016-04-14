@@ -1,6 +1,7 @@
 class TypeLicensesController < ApplicationController
   before_action :set_type_license, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  before_action :can_access, only: [:destroy]
   # GET /type_licenses
   # GET /type_licenses.json
   def index
@@ -54,7 +55,8 @@ class TypeLicensesController < ApplicationController
   # DELETE /type_licenses/1
   # DELETE /type_licenses/1.json
   def destroy
-    @type_license.destroy
+    @type_license.status = 0
+    @type_license.save!
     respond_to do |format|
       format.html { redirect_to type_licenses_url }
       format.json { head :no_content }
